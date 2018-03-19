@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxm.dao.SyscodeMapper">
+  <resultMap id="BaseResultMap" type="com.lxm.pojo.Syscode">
+    <id column="SYS_ID" jdbcType="DECIMAL" property="sysId" />
+    <result column="F_CODE" jdbcType="VARCHAR" property="fCode" />
+    <result column="F_VALUE" jdbcType="VARCHAR" property="fValue" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SYS_ID, F_CODE, F_VALUE
+  </sql>
+  <select id="selectByExample" parameterType="com.lxm.pojo.SyscodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SCOTT.SYSCODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SCOTT.SYSCODE
+    where SYS_ID = #{sysId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from SCOTT.SYSCODE
+    where SYS_ID = #{sysId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxm.pojo.SyscodeExample">
+    delete from SCOTT.SYSCODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxm.pojo.Syscode">
+    insert into SCOTT.SYSCODE (SYS_ID, F_CODE, F_VALUE
+      )
+    values (#{sysId,jdbcType=DECIMAL}, #{fCode,jdbcType=VARCHAR}, #{fValue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxm.pojo.Syscode">
+    insert into SCOTT.SYSCODE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysId != null">
+        SYS_ID,
+      </if>
+      <if test="fCode != null">
+        F_CODE,
+      </if>
+      <if test="fValue != null">
+        F_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysId != null">
+        #{sysId,jdbcType=DECIMAL},
+      </if>
+      <if test="fCode != null">
+        #{fCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fValue != null">
+        #{fValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxm.pojo.SyscodeExample" resultType="java.lang.Long">
+    select count(*) from SCOTT.SYSCODE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SCOTT.SYSCODE
+    <set>
+      <if test="record.sysId != null">
+        SYS_ID = #{record.sysId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fCode != null">
+        F_CODE = #{record.fCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fValue != null">
+        F_VALUE = #{record.fValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SCOTT.SYSCODE
+    set SYS_ID = #{record.sysId,jdbcType=DECIMAL},
+      F_CODE = #{record.fCode,jdbcType=VARCHAR},
+      F_VALUE = #{record.fValue,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxm.pojo.Syscode">
+    update SCOTT.SYSCODE
+    <set>
+      <if test="fCode != null">
+        F_CODE = #{fCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fValue != null">
+        F_VALUE = #{fValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SYS_ID = #{sysId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxm.pojo.Syscode">
+    update SCOTT.SYSCODE
+    set F_CODE = #{fCode,jdbcType=VARCHAR},
+      F_VALUE = #{fValue,jdbcType=VARCHAR}
+    where SYS_ID = #{sysId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectSub" resultType="java.util.Map">
+  
+  select F_CODE,F_VALUE from SYSCODE where F_CODE  IN('reSub2','reSub1')
+  
+  </select>
+  
+  <select id="selectSubVal" resultType="java.util.Map">
+  select F_CODE,F_VALUE from SYSCODE where F_CODE  IN('reSub2Val','reSub1Val')
+  </select>
+  
+  <update id="updateSysCode" parameterType="java.util.Map">
+  		<foreach collection="map.keys" item="item" index="index" open="begin" close=";end;" separator=";">
+  	update SYSCODE set F_VALUE = 
+  	
+  
+  	 '${map[item]}' where F_CODE = '${item}'
+  	</foreach>
+  
+  
+  </update>
+  
+  <select id="selectPercent" resultType="java.util.Map">
+  select F_CODE,F_VALUE from SYSCODE where F_CODE = 'reSub1Val' or F_CODE = 'reSub2Val' or F_CODE = 'FirstScore' or F_CODE ='SecondScore'
+  or F_CODE ='SecondWritten' or F_CODE ='SecondInterview' or F_CODE ='reEnglish' or F_CODE ='interview'
+  
+  </select>
+</mapper>

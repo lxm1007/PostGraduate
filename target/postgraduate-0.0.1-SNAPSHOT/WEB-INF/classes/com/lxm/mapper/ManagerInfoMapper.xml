@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxm.dao.ManagerInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lxm.pojo.ManagerInfo">
+    <id column="MANAGER_ID" jdbcType="DECIMAL" property="managerId" />
+    <result column="MANAGER_NAME" jdbcType="VARCHAR" property="managerName" />
+    <result column="MANAGER_TEL" jdbcType="VARCHAR" property="managerTel" />
+    <result column="MANAGER_TYPE" jdbcType="VARCHAR" property="managerType" />
+    <result column="MANAGER_ACCOUNT" jdbcType="VARCHAR" property="managerAccount" />
+    <result column="MANAGER_PWD" jdbcType="VARCHAR" property="managerPwd" />
+    <result column="MANAGER_COND" jdbcType="VARCHAR" property="managerCond" />
+    <result column="MANAGER_TITLE" jdbcType="VARCHAR" property="managerTitle" />
+    <result column="MANAGER_DETAIL" jdbcType="VARCHAR" property="managerDetail" />
+    <result column="MANAGER_RATEDNUM" jdbcType="VARCHAR" property="managerRatednum" />
+    <result column="MANAGER_SELECTED" jdbcType="VARCHAR" property="managerSelected" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MANAGER_ID, MANAGER_NAME, MANAGER_TEL, MANAGER_TYPE, MANAGER_ACCOUNT, MANAGER_PWD, 
+    MANAGER_COND, MANAGER_TITLE, MANAGER_DETAIL, MANAGER_RATEDNUM, MANAGER_SELECTED,MANAGER_STATE,
+    MANAGER_SEX,MANAGER_MENTORTYPE,MANAGER_MAJOR
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SCOTT.MANAGER_INFO
+    where MANAGER_ID = #{managerId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from SCOTT.MANAGER_INFO
+    where MANAGER_ID = #{managerId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.lxm.pojo.ManagerInfo">
+    insert into SCOTT.MANAGER_INFO (MANAGER_ID, MANAGER_NAME, MANAGER_TEL, 
+      MANAGER_TYPE, MANAGER_ACCOUNT, MANAGER_PWD, 
+      MANAGER_COND, MANAGER_TITLE, MANAGER_DETAIL, 
+      MANAGER_RATEDNUM, MANAGER_SELECTED)
+    values (#{managerId,jdbcType=DECIMAL}, #{managerName,jdbcType=VARCHAR}, #{managerTel,jdbcType=VARCHAR}, 
+      #{managerType,jdbcType=VARCHAR}, #{managerAccount,jdbcType=VARCHAR}, #{managerPwd,jdbcType=VARCHAR}, 
+      #{managerCond,jdbcType=VARCHAR}, #{managerTitle,jdbcType=VARCHAR}, #{managerDetail,jdbcType=VARCHAR}, 
+      #{managerRatednum,jdbcType=VARCHAR}, #{managerSelected,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxm.pojo.ManagerInfo">
+    insert into SCOTT.MANAGER_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="managerId != null">
+        MANAGER_ID,
+      </if>
+      <if test="managerName != null">
+        MANAGER_NAME,
+      </if>
+      <if test="managerTel != null">
+        MANAGER_TEL,
+      </if>
+      <if test="managerType != null">
+        MANAGER_TYPE,
+      </if>
+      <if test="managerAccount != null">
+        MANAGER_ACCOUNT,
+      </if>
+      <if test="managerPwd != null">
+        MANAGER_PWD,
+      </if>
+      <if test="managerCond != null">
+        MANAGER_COND,
+      </if>
+      <if test="managerTitle != null">
+        MANAGER_TITLE,
+      </if>
+      <if test="managerDetail != null">
+        MANAGER_DETAIL,
+      </if>
+      <if test="managerRatednum != null">
+        MANAGER_RATEDNUM,
+      </if>
+      <if test="managerSelected != null">
+        MANAGER_SELECTED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="managerId != null">
+        #{managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerTel != null">
+        #{managerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="managerType != null">
+        #{managerType,jdbcType=VARCHAR},
+      </if>
+      <if test="managerAccount != null">
+        #{managerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPwd != null">
+        #{managerPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="managerCond != null">
+        #{managerCond,jdbcType=VARCHAR},
+      </if>
+      <if test="managerTitle != null">
+        #{managerTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="managerDetail != null">
+        #{managerDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="managerRatednum != null">
+        #{managerRatednum,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSelected != null">
+        #{managerSelected,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+ 
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxm.pojo.ManagerInfo">
+    update SCOTT.MANAGER_INFO
+    <set>
+      <if test="managerName != null">
+        MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerTel != null">
+        MANAGER_TEL = #{managerTel,jdbcType=VARCHAR},
+      </if>
+      <if test="managerType != null">
+        MANAGER_TYPE = #{managerType,jdbcType=VARCHAR},
+      </if>
+      <if test="managerAccount != null">
+        MANAGER_ACCOUNT = #{managerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPwd != null">
+        MANAGER_PWD = #{managerPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="managerCond != null">
+        MANAGER_COND = #{managerCond,jdbcType=VARCHAR},
+      </if>
+      <if test="managerTitle != null">
+        MANAGER_TITLE = #{managerTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="managerDetail != null">
+        MANAGER_DETAIL = #{managerDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="managerRatednum != null">
+        MANAGER_RATEDNUM = #{managerRatednum,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSelected != null">
+        MANAGER_SELECTED = #{managerSelected,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MANAGER_ID = #{managerId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxm.pojo.ManagerInfo">
+    update SCOTT.MANAGER_INFO
+    set MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
+      MANAGER_TEL = #{managerTel,jdbcType=VARCHAR},
+      MANAGER_TYPE = #{managerType,jdbcType=VARCHAR},
+      MANAGER_ACCOUNT = #{managerAccount,jdbcType=VARCHAR},
+      MANAGER_PWD = #{managerPwd,jdbcType=VARCHAR},
+      MANAGER_COND = #{managerCond,jdbcType=VARCHAR},
+      MANAGER_TITLE = #{managerTitle,jdbcType=VARCHAR},
+      MANAGER_DETAIL = #{managerDetail,jdbcType=VARCHAR},
+      MANAGER_RATEDNUM = #{managerRatednum,jdbcType=VARCHAR},
+      MANAGER_SELECTED = #{managerSelected,jdbcType=VARCHAR}
+    where MANAGER_ID = #{managerId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getOne" parameterType="java.util.Map" resultType="com.lxm.pojo.ManagerInfo">
+  
+  	select <include refid="Base_Column_List"/>
+  	
+  	from MANAGER_INFO
+  	
+  	<where>
+  		<choose>
+  			<when test="user != null and pass != null">
+  			 MANAGER_ACCOUNT = #{user}
+  			 and 
+  			 MANAGER_PWD = #{pass}
+  			</when>
+  			<otherwise>
+  			1>2
+  			</otherwise>
+  		</choose>
+  	
+  	</where>
+  
+  </select>
+  <select id="selectByCon" parameterType="com.lxm.pojo.ManagerInfo" resultType="com.lxm.pojo.ManagerInfo">
+  	select <include refid="Base_Column_List"/> FROM MANAGER_INFO
+  	<where>
+ 		 	<if test="managerName != ''">
+ 		 	MANAGER_NAME like '%' ||#{managerName}||'%'
+ 		 	</if>
+  			<if test="managerTitle != ''">
+  			and MANAGER_TITLE = #{managerTitle}
+  			</if>
+  			and MANAGER_TYPE != '1'
+	</where>
+	</select>
+	<select id="searchDetail" resultType="java.util.Map" parameterType="java.lang.Long">
+	SELECT B.MANAGER_NAME,B.MANAGER_TEL,B.MANAGER_COND,A.STU_STATE
+		FROM STU_INFO A,MANAGER_INFO B
+		<where>
+		A.MANAGER_ID = B.MANAGER_ID(+)
+		<choose>
+			<when test="stuId != null  and stuId != ''">
+			and STU_ID = #{stuId}
+			</when>
+			<otherwise>
+			1>2
+			</otherwise>
+		</choose>
+		
+		</where>
+		
+		
+	</select>
+   <update id="updateTeachInfoFir" parameterType="com.lxm.pojo.ManagerInfo">
+   update 	MANAGER_INFO 
+   <set>
+   	<if test="managerName != null and managerName != ''">
+   		MANAGER_NAME = #{managerName},
+   	</if>
+   <if test="managerTel != null and managerTel != ''">
+   		MANAGER_TEL = #{managerTel},
+   </if>
+   <if test="managerSex != null and managerSex != ''">
+   		MANAGER_SEX = #{managerSex},
+   
+   </if>
+   <if test="managerDetail != null and managerDetail != ''">
+   
+   		MANAGER_DETAIL  = #{managerDetail},
+   </if>
+   <if test="managerMentortype != null and managerMentortype != ''">
+   		MANAGER_MENTORTYPE  =#{managerMentortype},
+   </if>
+   <if test="managerMajor != null and managerMajor != ''">
+   		MANAGER_MAJOR = #{managerMajor},
+   </if>
+   <if test="managerCond != null and managerCond != ''">
+   		MANAGER_COND = #{managerCond},
+   </if>
+   <if test="managerPwd != null and managerPwd != ''">
+   		MANAGER_PWD  = #{managerPwd},
+   </if>
+   		MANAGER_STATE = '2'
+   </set>
+   <where>
+   <choose>
+   	<when test="managerId != null and managerId != ''">
+   	
+   	MANAGER_ID = #{managerId}
+   	</when>
+   	<otherwise>
+   	1>2
+   	</otherwise>
+   
+   </choose>
+   
+   </where>
+   </update>
+  
+  <update id="updateStateByPrimary" parameterType="com.lxm.pojo.ManagerInfo">
+  
+  	update MANAGER_INFO SET MANAGER_STATE = '2'
+  	<where>
+  	<choose>
+  		<when test="managerId != null and  managerId != ''">
+  		MANAGER_ID  = #{managerId}
+  		</when>
+  	
+	  	<otherwise>
+	  		1>2
+	  	</otherwise>
+  	</choose>
+  	</where>
+
+  </update>
+  
+  <select id="searchSelect" resultType="java.util.Map" parameterType="com.lxm.pojo.ManagerInfo">
+  		select a.* from STU_INFO a,MANAGER_INFO b
+
+			where a.MANAGER_ID = b.MANAGER_ID
+			
+			<if test="managerId != null and managerId != ''">
+			and b.MANAGER_ID = #{managerId}
+			</if>
+
+  </select>
+  
+  <select id="selectedNum" parameterType="com.lxm.pojo.ManagerInfo" resultType="java.lang.String">
+  	select MANAGER_SELECTED  from MANAGER_INFO
+  	where MANAGER_ID = #{managerId,jdbcType=VARCHAR}
+  	 
+  
+  </select>
+  
+  <select id="searchSelectByExample" parameterType="java.util.Map" resultType="java.util.Map">
+  select a.* from STU_INFO a,MANAGER_INFO b
+			<where>
+			a.MANAGER_ID = b.MANAGER_ID
+			<if test="managerId != null and managerId != ''">
+			and b.MANAGER_ID = #{managerId}
+			</if>
+			<if test="stuName != null and stuName != ''">
+			and STU_NAME like '%'||#{stuName}||'%'
+			</if>
+			<if test="stuTel != null and stuTel != ''">
+			and STU_TEL like '%'||#{stuTel}||'%'
+			</if>
+			</where>
+  </select>
+  
+    <update id="updateNum" parameterType="com.lxm.pojo.ManagerInfo">
+  update MANAGER_INFO SET MANAGER_SELECTED = MANAGER_SELECTED+1
+  where
+  <choose>
+  <when test="managerId != null and managerId !=''">
+  	MANAGER_ID = #{managerId}
+  </when>
+  <otherwise>
+  1>2
+  </otherwise>
+  </choose>
+  </update>
+  
+  <insert id="addBatch" parameterType="java.util.List">
+ insert into MANAGER_INFO(MANAGER_ID,MANAGER_NAME,MANAGER_ACCOUNT,MANAGER_PWD,
+ 						 MANAGER_COND,MANAGER_TITLE,MANAGER_RATEDNUM,MANAGER_SEX,
+ 						 MANAGER_MENTORTYPE,MANAGER_MAJOR
+  ) select SEQ_MANAGER_INFO.NEXTVAL MANAGER_ID ,A.* from  (
+  <foreach collection="list" item="item" index="index" separator="UNION ALL">
+  select 
+            #{item.managerName},#{item.managerAccount},#{item.managerPwd},
+    		  #{item.managerCond},#{item.managerTitle},#{item.managerRatednum},#{item.managerSex},
+    		  #{item.managerMentortype},#{item.managerMajor}
+  from dual
+  </foreach> )A
+  
+  </insert>
+  
+  <select id="searchAllTea" resultType="com.lxm.pojo.ManagerInfo">
+  
+  	select <include refid="Base_Column_List"/> FROM MANAGER_INFO
+  	
+  	where MANAGER_TYPE != '1' and MANAGER_TYPE != '-1'
+  
+  </select>
+  
+  <select id="selectManager" resultType="com.lxm.pojo.ManagerInfo">
+  
+  	select <include refid="Base_Column_List"/> FROM MANAGER_INFO
+  		
+  	where MANAGER_ID = #{managerId}
+  		
+  	
+  </select>
+  
+  <update id="updateTeaInfoSecond" parameterType="com.lxm.pojo.ManagerInfo">
+  
+  	update MANAGER_INFO 
+  	
+  	<set>
+  	<if test="managerName != null and managerName !=''">
+  		MANAGER_NAME = #{managerName},
+  	</if>
+  	<if test="managerTel != null and managerTel !=''">
+  		MANAGER_TEL = #{managerTel},
+  	</if>
+  	<if test="managerCond!= null and managerCond !=''">
+  		MANAGER_COND = #{managerCond},
+  	</if>
+  	<if test="managerRatednum!= null and managerRatednum !=''">
+  		MANAGER_RATEDNUM = #{managerRatednum},
+  	</if>
+  	<if test="managerTitle!= null and managerTitle!=''">
+  		MANAGER_TITLE = #{managerTitle},
+  	</if>
+  	<if test="managerMentortype!= null and managerMentortype!=''">
+  		MANAGER_MENTORTYPE = #{managerMentortype},
+  	</if>
+  	<if test="managerMajor!= null and managerMajor!=''">
+  		MANAGER_Major = #{managerMajor},
+  	</if>
+  	</set>
+  <choose>
+  <when test="managerId != null and managerId != ''">
+  <where>
+  
+  MANAGER_ID = #{managerId}
+  </where>
+  
+  </when>
+  <otherwise>
+  1>2
+  
+  </otherwise>
+  </choose>
+  
+  </update>
+  <update id="assignDuty" parameterType="com.lxm.pojo.ManagerInfo">
+  	update MANAGER_INFO  set
+	 (MANAGER_TYPE) = 
+	 (
+		 case 
+		 when MANAGER_TYPE = '2' then '${managerType}'
+		 when MANAGER_TYPE  !='$managerType}' and MANAGER_TYPE  !='2' then '33'
+		 when MANAGER_TYPE = '${managerType}' then '${managerType}'
+		 end
+	)where 	MANAGER_ID = '${managerId}'
+  
+  </update>
+  <update id="deleteOneTea" parameterType="com.lxm.pojo.ManagerInfo">
+  update MANAGER_INFO set MANAGER_TYPE = '-1' 
+  <choose>
+  <when test="managerId != null and managerId != ''">
+  where MANAGER_ID = #{managerId}
+  </when>
+  <otherwise>
+  where 1>2
+  </otherwise>
+  </choose>
+  
+  </update>
+  
+  <insert id="addOneTea" parameterType="com.lxm.pojo.ManagerInfo">
+  
+   insert into MANAGER_INFO(MANAGER_ID,MANAGER_NAME,MANAGER_ACCOUNT,MANAGER_PWD,
+ 						 MANAGER_COND,MANAGER_TITLE,MANAGER_RATEDNUM,MANAGER_SEX,
+ 						 MANAGER_MENTORTYPE,MANAGER_MAJOR
+  ) values(SEQ_MANAGER_INFO.NEXTVAL,#{managerName},#{managerAccount},#{managerPwd},#{managerCond},#{managerTitle},#{managerRatednum},#{managerSex},#{managerMentortype},#{managerMajor})
+  
+  </insert>
+</mapper>

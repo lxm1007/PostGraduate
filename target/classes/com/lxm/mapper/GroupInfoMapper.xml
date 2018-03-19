@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxm.dao.GroupInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lxm.pojo.GroupInfo">
+    <id column="GROUP_ID" jdbcType="DECIMAL" property="groupId" />
+    <result column="GROUP_NUM" jdbcType="VARCHAR" property="groupNum" />
+    <result column="GROUP_TIME" jdbcType="VARCHAR" property="groupTime" />
+    <result column="GROUP_PLACE" jdbcType="VARCHAR" property="groupPlace" />
+    <result column="GROUP_TEA" jdbcType="VARCHAR" property="groupTea" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    GROUP_ID, GROUP_NUM, GROUP_TIME, GROUP_PLACE, GROUP_TEA
+  </sql>
+  <select id="selectByExample" parameterType="com.lxm.pojo.GroupInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SCOTT.GROUP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SCOTT.GROUP_INFO
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from SCOTT.GROUP_INFO
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxm.pojo.GroupInfoExample">
+    delete from SCOTT.GROUP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxm.pojo.GroupInfo">
+    insert into GROUP_INFO (GROUP_ID, GROUP_NUM, GROUP_TIME, 
+      GROUP_PLACE, GROUP_TEA)
+    values (SEQ_GROUP_INFO.nextval, #{groupNum,jdbcType=VARCHAR}, #{groupTime,jdbcType=VARCHAR}, 
+      #{groupPlace,jdbcType=VARCHAR}, #{groupTea,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxm.pojo.GroupInfo">
+    insert into SCOTT.GROUP_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        GROUP_ID,
+      </if>
+      <if test="groupNum != null">
+        GROUP_NUM,
+      </if>
+      <if test="groupTime != null">
+        GROUP_TIME,
+      </if>
+      <if test="groupPlace != null">
+        GROUP_PLACE,
+      </if>
+      <if test="groupTea != null">
+        GROUP_TEA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=DECIMAL},
+      </if>
+      <if test="groupNum != null">
+        #{groupNum,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTime != null">
+        #{groupTime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPlace != null">
+        #{groupPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTea != null">
+        #{groupTea,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxm.pojo.GroupInfoExample" resultType="java.lang.Long">
+    select count(*) from SCOTT.GROUP_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SCOTT.GROUP_INFO
+    <set>
+      <if test="record.groupId != null">
+        GROUP_ID = #{record.groupId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.groupNum != null">
+        GROUP_NUM = #{record.groupNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupTime != null">
+        GROUP_TIME = #{record.groupTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupPlace != null">
+        GROUP_PLACE = #{record.groupPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupTea != null">
+        GROUP_TEA = #{record.groupTea,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SCOTT.GROUP_INFO
+    set GROUP_ID = #{record.groupId,jdbcType=DECIMAL},
+      GROUP_NUM = #{record.groupNum,jdbcType=VARCHAR},
+      GROUP_TIME = #{record.groupTime,jdbcType=VARCHAR},
+      GROUP_PLACE = #{record.groupPlace,jdbcType=VARCHAR},
+      GROUP_TEA = #{record.groupTea,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxm.pojo.GroupInfo">
+    update SCOTT.GROUP_INFO
+    <set>
+      <if test="groupNum != null">
+        GROUP_NUM = #{groupNum,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTime != null">
+        GROUP_TIME = #{groupTime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPlace != null">
+        GROUP_PLACE = #{groupPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTea != null">
+        GROUP_TEA = #{groupTea,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxm.pojo.GroupInfo">
+    update SCOTT.GROUP_INFO
+    set GROUP_NUM = #{groupNum,jdbcType=VARCHAR},
+      GROUP_TIME = #{groupTime,jdbcType=VARCHAR},
+      GROUP_PLACE = #{groupPlace,jdbcType=VARCHAR},
+      GROUP_TEA = #{groupTea,jdbcType=VARCHAR}
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="serachGroupInfo" resultType="java.util.Map">
+  SELECT <include refid="Base_Column_List"/> FROM GROUP_INFO WHERE GROUP_ID = 
+  (SELECT MAX(GROUP_ID) FROM GROUP_INFO WHERE GROUP_NUM = #{groupNum}) 
+  
+  </select>
+</mapper>

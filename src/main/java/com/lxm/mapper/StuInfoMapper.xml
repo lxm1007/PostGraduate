@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxm.dao.StuInfoMapper">
+  <resultMap id="BaseResultMap" type="com.lxm.pojo.StuInfo">
+    <id column="STU_ID" jdbcType="DECIMAL" property="stuId" />
+    <result column="MANAGER_ID" jdbcType="DECIMAL" property="managerId" />
+    <result column="STU_NAME" jdbcType="VARCHAR" property="stuName" />
+    <result column="STU_IDCARD" jdbcType="VARCHAR" property="stuIdcard" />
+    <result column="STU_TEL" jdbcType="VARCHAR" property="stuTel" />
+    <result column="STU_WECHAT" jdbcType="VARCHAR" property="stuWechat" />
+    <result column="STU_QQ" jdbcType="VARCHAR" property="stuQq" />
+    <result column="STU_STATE" jdbcType="VARCHAR" property="stuState" />
+    <result column="STU_POLOTICS" jdbcType="DECIMAL" property="stuPolotics" />
+    <result column="STU_ENGLISH" jdbcType="DECIMAL" property="stuEnglish" />
+    <result column="STU_SUB1" jdbcType="DECIMAL" property="stuSub1" />
+    <result column="STU_SUB2" jdbcType="DECIMAL" property="stuSub2" />
+    <result column="STU_RESUB1" jdbcType="DECIMAL" property="stuResub1" />
+    <result column="STU_RESUB2" jdbcType="DECIMAL" property="stuResub2" />
+    <result column="STU_REENGLISH" jdbcType="DECIMAL" property="stuReenglish" />
+    <result column="STU_INTERVIEW" jdbcType="DECIMAL" property="stuInterview" />
+    <result column="STU_ACCOUNT" jdbcType="VARCHAR" property="stuAccount" />
+    <result column="STU_PWD" jdbcType="VARCHAR" property="stuPwd" />
+  </resultMap>
+  
+ 
+  <sql id="Base_Column_List">
+    STU_ID, MANAGER_ID, STU_NAME, STU_IDCARD, STU_TEL, STU_WECHAT, STU_QQ, STU_STATE, 
+    STU_POLOTICS, STU_ENGLISH, STU_SUB1, STU_SUB2, STU_RESUB1, STU_RESUB2, STU_REENGLISH, 
+    STU_INTERVIEW, STU_ACCOUNT, STU_PWD,STU_CANDIDATE,
+    STU_SEX,STU_TOTALSCORE1,STU_TOTALSCORE2,STU_SPECIALTYCODE,STU_MAJORNAME,
+    STU_MAJORCONDITION,STU_GRADUATIONSCHOOL,STU_GRADUATIONMAJOR,STU_GRADUATIONTIME,STU_MASTERTYPE,STU_STUDYTYPE,
+    STU_HONOR,STU_EMAIL
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SCOTT.STU_INFO
+    where STU_ID = #{stuId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from SCOTT.STU_INFO
+    where STU_ID = #{stuId,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.lxm.pojo.StuInfo">
+    insert into SCOTT.STU_INFO (STU_ID, MANAGER_ID, STU_NAME, 
+      STU_IDCARD, STU_TEL, STU_WECHAT, 
+      STU_QQ, STU_STATE, STU_POLOTICS, 
+      STU_ENGLISH, STU_SUB1, STU_SUB2, 
+      STU_RESUB1, STU_RESUB2, STU_REENGLISH, 
+      STU_INTERVIEW, STU_ACCOUNT, STU_PWD
+      )
+    values (#{stuId,jdbcType=DECIMAL}, #{managerId,jdbcType=DECIMAL}, #{stuName,jdbcType=VARCHAR}, 
+      #{stuIdcard,jdbcType=VARCHAR}, #{stuTel,jdbcType=VARCHAR}, #{stuWechat,jdbcType=VARCHAR}, 
+      #{stuQq,jdbcType=VARCHAR}, #{stuState,jdbcType=VARCHAR}, #{stuPolotics,jdbcType=DECIMAL}, 
+      #{stuEnglish,jdbcType=DECIMAL}, #{stuSub1,jdbcType=DECIMAL}, #{stuSub2,jdbcType=DECIMAL}, 
+      #{stuResub1,jdbcType=DECIMAL}, #{stuResub2,jdbcType=DECIMAL}, #{stuReenglish,jdbcType=DECIMAL}, 
+      #{stuInterview,jdbcType=DECIMAL}, #{stuAccount,jdbcType=VARCHAR}, #{stuPwd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxm.pojo.StuInfo">
+    insert into SCOTT.STU_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stuId != null">
+        STU_ID,
+      </if>
+      <if test="managerId != null">
+        MANAGER_ID,
+      </if>
+      <if test="stuName != null">
+        STU_NAME,
+      </if>
+      <if test="stuIdcard != null">
+        STU_IDCARD,
+      </if>
+      <if test="stuTel != null">
+        STU_TEL,
+      </if>
+      <if test="stuWechat != null">
+        STU_WECHAT,
+      </if>
+      <if test="stuQq != null">
+        STU_QQ,
+      </if>
+      <if test="stuState != null">
+        STU_STATE,
+      </if>
+      <if test="stuPolotics != null">
+        STU_POLOTICS,
+      </if>
+      <if test="stuEnglish != null">
+        STU_ENGLISH,
+      </if>
+      <if test="stuSub1 != null">
+        STU_SUB1,
+      </if>
+      <if test="stuSub2 != null">
+        STU_SUB2,
+      </if>
+      <if test="stuResub1 != null">
+        STU_RESUB1,
+      </if>
+      <if test="stuResub2 != null">
+        STU_RESUB2,
+      </if>
+      <if test="stuReenglish != null">
+        STU_REENGLISH,
+      </if>
+      <if test="stuInterview != null">
+        STU_INTERVIEW,
+      </if>
+      <if test="stuAccount != null">
+        STU_ACCOUNT,
+      </if>
+      <if test="stuPwd != null">
+        STU_PWD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stuId != null">
+        #{stuId,jdbcType=DECIMAL},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="stuName != null">
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuIdcard != null">
+        #{stuIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="stuTel != null">
+        #{stuTel,jdbcType=VARCHAR},
+      </if>
+      <if test="stuWechat != null">
+        #{stuWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="stuQq != null">
+        #{stuQq,jdbcType=VARCHAR},
+      </if>
+      <if test="stuState != null">
+        #{stuState,jdbcType=VARCHAR},
+      </if>
+      <if test="stuPolotics != null">
+        #{stuPolotics,jdbcType=DECIMAL},
+      </if>
+      <if test="stuEnglish != null">
+        #{stuEnglish,jdbcType=DECIMAL},
+      </if>
+      <if test="stuSub1 != null">
+        #{stuSub1,jdbcType=DECIMAL},
+      </if>
+      <if test="stuSub2 != null">
+        #{stuSub2,jdbcType=DECIMAL},
+      </if>
+      <if test="stuResub1 != null">
+        #{stuResub1,jdbcType=DECIMAL},
+      </if>
+      <if test="stuResub2 != null">
+        #{stuResub2,jdbcType=DECIMAL},
+      </if>
+      <if test="stuReenglish != null">
+        #{stuReenglish,jdbcType=DECIMAL},
+      </if>
+      <if test="stuInterview != null">
+        #{stuInterview,jdbcType=DECIMAL},
+      </if>
+      <if test="stuAccount != null">
+        #{stuAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="stuPwd != null">
+        #{stuPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxm.pojo.StuInfo">
+    update SCOTT.STU_INFO
+    <set>
+      <if test="managerId != null">
+        MANAGER_ID = #{managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="stuName != null">
+        STU_NAME = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuIdcard != null">
+        STU_IDCARD = #{stuIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="stuTel != null">
+        STU_TEL = #{stuTel,jdbcType=VARCHAR},
+      </if>
+      <if test="stuWechat != null">
+        STU_WECHAT = #{stuWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="stuQq != null">
+        STU_QQ = #{stuQq,jdbcType=VARCHAR},
+      </if>
+      <if test="stuState != null">
+        STU_STATE = #{stuState,jdbcType=VARCHAR},
+      </if>
+      <if test="stuPolotics != null">
+        STU_POLOTICS = #{stuPolotics,jdbcType=DECIMAL},
+      </if>
+      <if test="stuEnglish != null">
+        STU_ENGLISH = #{stuEnglish,jdbcType=DECIMAL},
+      </if>
+      <if test="stuSub1 != null">
+        STU_SUB1 = #{stuSub1,jdbcType=DECIMAL},
+      </if>
+      <if test="stuSub2 != null">
+        STU_SUB2 = #{stuSub2,jdbcType=DECIMAL},
+      </if>
+      <if test="stuResub1 != null">
+        STU_RESUB1 = #{stuResub1,jdbcType=DECIMAL},
+      </if>
+      <if test="stuResub2 != null">
+        STU_RESUB2 = #{stuResub2,jdbcType=DECIMAL},
+      </if>
+      <if test="stuReenglish != null">
+        STU_REENGLISH = #{stuReenglish,jdbcType=DECIMAL},
+      </if>
+      <if test="stuInterview != null">
+        STU_INTERVIEW = #{stuInterview,jdbcType=DECIMAL},
+      </if>
+      <if test="stuAccount != null">
+        STU_ACCOUNT = #{stuAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="stuPwd != null">
+        STU_PWD = #{stuPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where STU_ID = #{stuId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxm.pojo.StuInfo">
+    update SCOTT.STU_INFO
+    set MANAGER_ID = #{managerId,jdbcType=DECIMAL},
+      STU_NAME = #{stuName,jdbcType=VARCHAR},
+      STU_IDCARD = #{stuIdcard,jdbcType=VARCHAR},
+      STU_TEL = #{stuTel,jdbcType=VARCHAR},
+      STU_WECHAT = #{stuWechat,jdbcType=VARCHAR},
+      STU_QQ = #{stuQq,jdbcType=VARCHAR},
+      STU_STATE = #{stuState,jdbcType=VARCHAR},
+      STU_POLOTICS = #{stuPolotics,jdbcType=DECIMAL},
+      STU_ENGLISH = #{stuEnglish,jdbcType=DECIMAL},
+      STU_SUB1 = #{stuSub1,jdbcType=DECIMAL},
+      STU_SUB2 = #{stuSub2,jdbcType=DECIMAL},
+      STU_RESUB1 = #{stuResub1,jdbcType=DECIMAL},
+      STU_RESUB2 = #{stuResub2,jdbcType=DECIMAL},
+      STU_REENGLISH = #{stuReenglish,jdbcType=DECIMAL},
+      STU_INTERVIEW = #{stuInterview,jdbcType=DECIMAL},
+      STU_ACCOUNT = #{stuAccount,jdbcType=VARCHAR},
+      STU_PWD = #{stuPwd,jdbcType=VARCHAR}
+    where STU_ID = #{stuId,jdbcType=DECIMAL}
+  </update>
+  <!-- 登录 -->
+   <select id="stuLogin" resultType="com.lxm.pojo.StuInfo">
+	 select
+   
+    <include refid="Base_Column_List" />
+    from SCOTT.STU_INFO
+    
+    <where>
+    <if test="pass != null">
+    and STU_PWD = #{pass}
+    </if>
+    <if test="user != null">
+    and STU_ACCOUNT = #{user}
+    </if>
+    </where>
+  
+  </select>
+  <!-- 重置密码 -->
+   <select id="stuGetOne" resultType="com.lxm.pojo.StuInfo">
+	 select
+   
+    <include refid="Base_Column_List" />
+    from SCOTT.STU_INFO
+    
+    <where>
+    <if test="stuName != null">
+    and STU_NAME = #{stuName}
+    </if>
+    <if test="stuIdcard != null">
+    and STU_IDCARD = #{stuIdcard}
+    </if>
+    </where>
+  
+  </select>
+  
+  <update id="updatePwd" parameterType="java.util.Map">
+  	update STU_INFO set 
+  	<if test="rePwd != null">
+  	STU_PWD = #{rePwd}
+  	
+  	</if>
+  	where STU_ID = #{stuId}
+  	
+  </update>
+  
+  <select id="getAccount"  resultType="com.lxm.pojo.StuInfo">
+  	select 
+ 	<include refid="Base_Column_List" />
+    from SCOTT.STU_INFO
+    
+    where 
+    <choose>
+    	<when test="stuAccount != null and stuAccount != ''">
+    	STU_ACCOUNT=#{stuAccount}
+    	</when>
+    	<otherwise>
+    	1>2
+    	</otherwise>
+    
+    </choose>
+
+  </select>
+  
+  <select id="getCandidate" resultType="com.lxm.pojo.StuInfo">
+  	select 
+ 	<include refid="Base_Column_List" />
+    from SCOTT.STU_INFO
+    
+    where 
+    <choose>
+    	<when test="stuCandidate != null and stuCandidate != ''">
+    	STU_CANDIDATE=#{stuCandidate}
+    	</when>
+    	<otherwise>
+    	1>2
+    	</otherwise>
+    
+    </choose>
+  
+  </select>
+  
+  <update id="register" parameterType="com.lxm.pojo.StuInfo">
+  	update STU_INFO 
+  	<set>
+  	
+  		<if test="stuTel != null">
+  		STU_TEL=#{stuTel},
+  		</if>
+  		<if test="stuAccount != null">
+  		STU_ACCOUNT = #{stuAccount},
+  		</if>
+  		<if test="stuPwd != null">
+  		STU_PWD = #{stuPwd},
+  		</if>
+  		
+  	</set>
+  		where 
+  			<choose>
+  				<when test="stuCandidate != null">
+  					STU_CANDIDATE = #{stuCandidate}
+  				</when>
+  				<otherwise>
+  					1>2
+  				</otherwise>
+  			</choose>
+			
+  </update>
+  
+  <update id="firstUpdate" parameterType="java.util.Map">
+  	update STU_INFO 
+  	
+  	<set>
+  	
+  	<if test="stuTel != null">
+  	STU_TEL = #{stuTel},
+  	</if>
+  	<if test="stuIdcard != null">
+  	STU_IDCARD = #{stuIdcard},
+  	</if>
+  	<if test="stuEmail != null">
+  	STU_EMAIL = #{stuEmail},
+  	</if>
+  	<if test="stuQq != null">
+  	STU_QQ = #{stuQq},
+  	</if>
+  	<if test="stuWechat != null">
+  	STU_WECHAT = #{stuWechat},
+  	</if>
+  	<if test="stuHonor != null">
+  	STU_HONOR = #{stuHonor}
+  	</if>
+  	where 
+  	<if test="stuId != null">
+  	STU_ID = #{stuId}
+  	</if>
+  	</set>
+  
+  </update>
+  
+  <update id="updateType" parameterType="com.lxm.pojo.StuInfo">
+  
+  update STU_INFO SET STU_STATE  = 2 
+  where 
+  <choose>
+  <when test="stuId != null">
+    STU_ID = #{stuId}
+  </when>
+  <otherwise>
+  1>2
+  </otherwise>
+  </choose>
+ 
+  </update>
+  
+  <update id="updateStuMangerId" parameterType="com.lxm.pojo.StuInfo">
+  	update STU_INFO 
+  	<set>
+  	<if test="managerId != null and managerId != ''">
+  		MANAGER_ID = #{managerId} ,STU_STATE = '3'
+  	</if>
+  	
+  	</set>
+  	<if test="stuId != null and stuId != ''">
+  	
+  	where STU_ID = #{stuId}
+  	</if>
+  </update>
+  
+  <select id="selectStuInfo" resultType="com.lxm.pojo.StuInfo">
+  select <include refid="Base_Column_List"/>
+  from STU_INFO 
+  
+  <if test="stuId != null and stuId != ''">
+  where STU_ID = #{stuId}
+  </if>
+  
+  </select>
+  
+  <update id="changeStuType" parameterType="com.lxm.pojo.StuInfo">
+  
+  update STU_INFO SET STU_STATE = '4' 
+  WHERE
+  <choose>
+  <when test="stuId != null and stuId != ''">
+  STU_ID = #{stuId}
+  </when>
+  <otherwise>
+  1>2
+  </otherwise>
+  </choose>
+  
+  </update>
+  
+  <insert id="addBatch" parameterType="java.util.List">
+  insert into STU_INFO(STU_ID,STU_CANDIDATE,STU_NAME,STU_SPECIALTYCODE,STU_MAJORNAME,STU_POLOTICS,STU_ENGLISH,
+  STU_SUB1, STU_SUB2,STU_TOTALSCORE1,STU_SEX,STU_MAJORCONDITION,STU_GRADUATIONSCHOOL,STU_GRADUATIONMAJOR,STU_GRADUATIONTIME,
+  STU_STATE,STU_STUDYTYPE,STU_MASTERTYPE
+  ) select SEQ_STU_INFO.NEXTVAL STU_ID ,A.* from  (
+  <foreach collection="list" item="item" index="index" separator="UNION ALL">
+  select 
+            #{item.stuCandidate},#{item.stuName},#{item.stuSpecialtycode},
+    		  #{item.stuMajorname},#{item.stuPolotics},#{item.stuEnglish},#{item.stuSub1},
+    		  #{item.stuSub2},#{item.stuTotalscore1},#{item.stuSex},#{item.stuMajorcondition},
+    		  #{item.stuGraduationschool},#{item.stuGraduationmajor},#{item.stuGraduationtime},
+    		  #{item.stuState},#{item.stuStudytype},#{item.stuMastertype}
+    		  
+  from dual
+  </foreach> )A
+ 
+  </insert>
+  
+  
+  <select id="selectAllStuByExample" resultType="com.lxm.pojo.StuInfo" parameterType="com.lxm.pojo.StuInfo">
+  	
+  	select  <include refid="Base_Column_List" />
+  	
+  	from STU_INFO 
+  	<where>
+  	
+  	<if test="stuTel != null and stuTel !=''">
+  	STU_TEL LIKE '%'||#{stuTel}||'%'
+  	</if>
+  	<if test="stuName != null and stuName != ''">
+  	and STU_NAME LIKE '%'||#{stuName}||'%'
+  	</if>
+  	</where>
+  	
+  </select>
+  
+  <select id="selectAllByTea"  resultType="com.lxm.pojo.StuInfo">
+ 	select  <include refid="Base_Column_List" />
+  	
+  	from STU_INFO 
+  where STU_STATE != '-1' and STU_STATE &lt;= '9'
+  order by STU_MAJORNAME
+  </select>
+   <select id="selectAll" parameterType="com.lxm.pojo.StuInfo" resultType="com.lxm.pojo.StuInfo">
+ 	select  <include refid="Base_Column_List" />
+  	
+  	from STU_INFO 
+  where STU_STATE != '-1'
+  order by STU_MAJORNAME
+  </select>
+
+  <update id="updateStuInfoByTea" parameterType="com.lxm.pojo.StuInfo">
+   update STU_INFO
+    <set>
+     
+      <if test="stuName != null and stuName !=''">
+        STU_NAME = #{stuName,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="stuTel != null and stuTel != ''">
+        STU_TEL = #{stuTel,jdbcType=VARCHAR},
+      </if>
+      <if test="stuPolotics != null and stuPolotics !=''">
+        STU_POLOTICS = #{stuPolotics,jdbcType=DECIMAL},
+      </if>
+      <if test="stuEnglish != null and stuEnglish != ''">
+        STU_ENGLISH = #{stuEnglish,jdbcType=DECIMAL},
+      </if>
+      <if test="stuSub1 != null and stuSub1 != ''">
+        STU_SUB1 = #{stuSub1,jdbcType=DECIMAL},
+      </if>
+      <if test="stuSub2 != null and stuSub2 != ''">
+        STU_SUB2 = #{stuSub2,jdbcType=DECIMAL},
+      </if>
+      <if test="stuMajorcondition !=null and stuMajorcondition!=''">
+      STU_MAJORCONDITION = #{stuMajorcondition},
+      </if>
+    <if test="stuGraduationschool != null and stuGraduationschool!=''">
+    STU_GRADUATIONSCHOOL = #{stuGraduationschool},
+    </if>
+     <if test="stuGraduationmajor != null and stuGraduationmajor!=''">
+    STU_GRADUATIONMAJOR = #{stuGraduationmajor},
+    </if>
+	<if test="stuMastertype != null and stuMastertype!=''">
+	STU_MASTERTYPE = #{stuMastertype},
+	</if>
+	<if test="stuTotalscore1!=null and stuTotalscore1!=''">
+	STU_TOTALSCORE1 = #{stuTotalscore1}
+	</if>
+    </set>
+    where STU_ID = #{stuId,jdbcType=DECIMAL} and STU_STATE != '-1'
+  </update>
+  
+  <update id="updateState" parameterType="com.lxm.pojo.StuInfo">
+  update STU_INFO set STU_STATE = '-1',MANAGER_ID = '' where STU_ID = #{stuID}
+  </update>
+  
+  <insert id="addOneByTea" parameterType="com.lxm.pojo.StuInfo">
+  
+   insert into STU_INFO(STU_ID,STU_CANDIDATE,STU_NAME,STU_SPECIALTYCODE,STU_POLOTICS,STU_ENGLISH,
+  STU_SUB1, STU_SUB2,STU_TOTALSCORE1,STU_SEX,STU_MAJORCONDITION,STU_GRADUATIONSCHOOL,STU_GRADUATIONMAJOR,STU_GRADUATIONTIME,
+  STU_STATE,STU_STUDYTYPE,STU_MASTERTYPE,STU_MAJORNAME) values(
+  				SEQ_STU_INFO.NEXTVAL,#{stuCandidate},#{stuName},#{stuSpecialtycode},
+    		  #{stuPolotics},#{stuEnglish},#{stuSub1},
+    		  #{stuSub2},#{stuTotalscore1},#{stuSex},#{stuMajorcondition},
+    		  #{stuGraduationschool},#{stuGraduationmajor},#{stuGraduationtime},
+    		  '1',#{stuStudytype},#{stuMastertype},#{stuMajorname})
+  </insert>
+  
+  <update id="deleteAllStu">
+  
+  update STU_INFO set STU_STATE = '-1',MANAGER_ID = '' 
+  </update>
+  
+  <update id="addOneGroup" parameterType="java.util.Map">
+  update STU_INFO SET 
+  <if test="stuState != null and stuState !=''">
+ STU_STATE = #{stuState}
+  </if>
+   
+  where STU_ID in
+   <foreach collection="stuId" index="index" item="stuId"
+            open="(" separator="," close=")">
+            #{stuId}
+        </foreach>
+  
+  </update>
+  
+  <select id="showAllGroup" resultType="java.util.Map">
+ 	select stu_state,count(*) num from STU_INFO where stu_state >'9'
+  group by stu_state order by stu_state
+  </select>
+  <select id="serachGroupstu" resultType="java.util.Map">
+  select <include refid="Base_Column_List"/> from STU_INFO
+  where STU_STATE = #{stuState}
+  
+  </select>
+  
+  <select id="searchStuAndTea" resultType="java.util.Map" parameterType="com.lxm.pojo.StuInfo">
+  select  a.STU_ID,a.STU_NAME,A.MANAGER_ID,a.STU_CANDIDATE,b.MANAGER_NAME
+  	
+  	from STU_INFO a,MANAGER_INFO b
+  	<where>
+  	a.MANAGER_ID = b.MANAGER_ID
+  	<if test="stuCandidate !=null">
+  	and STU_CANDIDATE LIKE '%'||#{stuCandidate}||'%'
+  	</if>
+  	<if test="stuName !=null">
+  	and STU_NAME LIKE '%'||#{stuName}||'%'
+  	</if>
+  	</where>
+  
+  </select>
+  
+  <update id="emptyTeaId" parameterType="com.lxm.pojo.StuInfo">
+  update STU_INFO set MANAGER_ID = '',STU_STATE = '5'
+  
+  <choose>
+  <when test="stuId != null and stuId != ''">
+ where  STU_ID = #{stuId}
+  </when>
+  <otherwise>
+ where 1>2
+  </otherwise>
+  
+  </choose>
+  </update>
+  
+  <update id="addReTestScore" parameterType="com.lxm.pojo.StuInfo">
+    update STU_INFO 
+    <set>
+    <if test="stuResub1 != null and stuResub1 !=''">
+    STU_RESUB1 = #{stuResub1},
+    </if>
+    <if test="stuResub2 != null and stuResub2 !=''">
+    STU_RESUB2 = #{stuResub2},
+    </if>
+     <if test="stuInterview != null and stuInterview !=''">
+    STU_INTERVIEW = #{stuInterview},
+    </if>
+    <if test="stuReenglish != null and stuReenglish !=''">
+    STU_REENGLISH = #{stuReenglish}
+    </if>
+    
+    </set>
+  
+  <choose>
+  <when test="stuId != null and stuId != ''">
+ where  STU_ID = #{stuId}
+  </when>
+  <otherwise>
+ where 1>2
+  </otherwise>
+  
+  </choose>
+  
+  </update>
+<select id="searchStuAndScore" resultType="com.lxm.pojo.StuInfo" parameterType="com.lxm.pojo.StuInfo">
+select <include refid="Base_Column_List"/> from STU_INFO
+
+<where>
+  	<if test="stuCandidate !=null">
+  	STU_CANDIDATE LIKE '%'||#{stuCandidate}||'%'
+  	</if>
+  	<if test="stuName != null">
+  	and STU_NAME LIKE '%'||#{stuName}||'%'
+  	</if>
+  	</where>
+
+</select>
+
+
+<select id="showAllScore" resultType="java.util.Map">
+select STU_ID,STU_ID,STU_NAME,STU_SUB1,STU_SUB2,STU_POLOTICS,STU_ENGLISH,STU_TOTALSCORE1,STU_RESUB1,STU_RESUB2,STU_REENGLISH,STU_INTERVIEW,STU_CANDIDATE from STU_INFO 
+
+</select>
+</mapper>

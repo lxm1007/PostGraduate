@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxm.dao.ManagerSelectMapper">
+  <resultMap id="BaseResultMap" type="com.lxm.pojo.ManagerSelect">
+    <id column="SELECT_ID" jdbcType="DECIMAL" property="selectId" />
+    <result column="STU_ID" jdbcType="DECIMAL" property="stuId" />
+    <result column="MANAGER_ID" jdbcType="DECIMAL" property="managerId" />
+    <result column="SELECT_TIME" jdbcType="TIMESTAMP" property="selectTime" />
+    <result column="SELECT_TYPE" jdbcType="VARCHAR" property="selectType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SELECT_ID, STU_ID, MANAGER_ID, SELECT_TIME, SELECT_TYPE
+  </sql>
+  <select id="selectByExample" parameterType="com.lxm.pojo.ManagerSelectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SCOTT.MANAGER_SELECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SCOTT.MANAGER_SELECT
+    where SELECT_ID = #{selectId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from SCOTT.MANAGER_SELECT
+    where SELECT_ID = #{selectId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lxm.pojo.ManagerSelectExample">
+    delete from SCOTT.MANAGER_SELECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lxm.pojo.ManagerSelect">
+    insert into SCOTT.MANAGER_SELECT (SELECT_ID, STU_ID, MANAGER_ID, 
+      SELECT_TIME, SELECT_TYPE)
+    values (seq_manager_select.nextval, #{stuId,jdbcType=DECIMAL}, #{managerId,jdbcType=DECIMAL}, 
+      #{selectTime,jdbcType=TIMESTAMP}, #{selectType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lxm.pojo.ManagerSelect">
+    insert into SCOTT.MANAGER_SELECT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="selectId != null">
+        SELECT_ID,
+      </if>
+      <if test="stuId != null">
+        STU_ID,
+      </if>
+      <if test="managerId != null">
+        MANAGER_ID,
+      </if>
+      <if test="selectTime != null">
+        SELECT_TIME,
+      </if>
+      <if test="selectType != null">
+        SELECT_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="selectId != null">
+        #{selectId,jdbcType=DECIMAL},
+      </if>
+      <if test="stuId != null">
+        #{stuId,jdbcType=DECIMAL},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="selectTime != null">
+        #{selectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="selectType != null">
+        #{selectType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lxm.pojo.ManagerSelectExample" resultType="java.lang.Long">
+    select count(*) from SCOTT.MANAGER_SELECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SCOTT.MANAGER_SELECT
+    <set>
+      <if test="record.selectId != null">
+        SELECT_ID = #{record.selectId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stuId != null">
+        STU_ID = #{record.stuId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.managerId != null">
+        MANAGER_ID = #{record.managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.selectTime != null">
+        SELECT_TIME = #{record.selectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.selectType != null">
+        SELECT_TYPE = #{record.selectType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SCOTT.MANAGER_SELECT
+    set SELECT_ID = #{record.selectId,jdbcType=DECIMAL},
+      STU_ID = #{record.stuId,jdbcType=DECIMAL},
+      MANAGER_ID = #{record.managerId,jdbcType=DECIMAL},
+      SELECT_TIME = #{record.selectTime,jdbcType=TIMESTAMP},
+      SELECT_TYPE = #{record.selectType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lxm.pojo.ManagerSelect">
+    update SCOTT.MANAGER_SELECT
+    <set>
+      <if test="stuId != null">
+        STU_ID = #{stuId,jdbcType=DECIMAL},
+      </if>
+      <if test="managerId != null">
+        MANAGER_ID = #{managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="selectTime != null">
+        SELECT_TIME = #{selectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="selectType != null">
+        SELECT_TYPE = #{selectType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SELECT_ID = #{selectId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lxm.pojo.ManagerSelect">
+    update SCOTT.MANAGER_SELECT
+    set STU_ID = #{stuId,jdbcType=DECIMAL},
+      MANAGER_ID = #{managerId,jdbcType=DECIMAL},
+      SELECT_TIME = #{selectTime,jdbcType=TIMESTAMP},
+      SELECT_TYPE = #{selectType,jdbcType=VARCHAR}
+    where SELECT_ID = #{selectId,jdbcType=DECIMAL}
+  </update>
+  
+
+</mapper>
