@@ -155,9 +155,11 @@
 			                <a id="a2" href="javascript:;"><i class="my-icon nav-icon icon_2"></i><span class="spanText">教师信息</span><i class="my-icon nav-more"></i></a>
 			                <ul id="ul2">
 			                    <li id="li21"><a href="javascript:updateInfo2();"><span class="spanTextSon">我的信息</span></a></li>
-			                    <li id="li22"><a href="http://cise.sdust.edu.cn/web2010/cp.php?ac=teachers&tuid=1"><span class="spanTextSon">详细介绍</span></a></li>
+			                    <li id="li22"><a href="javascript:jump()"><span class="spanTextSon">详细介绍</span></a></li>
 			                    <li id="li23"><a href="javascript:showSelect();"><span class="spanTextSon">选择情况</span></a></li>
 			                    <li id="li24"><a href="Javascript:searchTea()"><span class="spanTextSon">导师选择</span></a></li>
+			                    <li id="li25"><a href="Javascript:updatePwd()"><span class="spanTextSon">修改密码</span></a></li>
+			                    
 			                </ul>
 			            </li>
 			            <li class="nav-item" id="li3">
@@ -166,14 +168,14 @@
 			                    <li id="li31"><a  href="javascript:upload1();"><span class="spanTextSon">上传初试分数</span></a></li>
 			                    <li id="li32"><a href="javascript:addReTestScore();"><span class="spanTextSon">上传复试笔试分数</span></a></li>
 			                    <li id="li33"><a href="javascript:addReTestScore2();"><span class="spanTextSon">上传复试面试分数</span></a></li>
-			                    <li id="li34"><a href="javascript:updateSub();"><span class="spanTextSon">修改复试成绩比例</span></a></li>
+			                   <!--  <li id="li34"><a href="javascript:updateSub();"><span class="spanTextSon">修改复试成绩比例</span></a></li> -->
 			                    <li id="li35"><a href="javascript:emptyTea();"><span class="spanTextSon">解除学生与导师关系</span></a></li>
 			                    <li id="li36"><a href="javascript:upload2();"><span class="spanTextSon">上传教师信息</span></a></li>
 			                    <li id="li37"><a href="javascript:updateStuInfo();"><span class="spanTextSon">学生信息维护</span></a></li>
 			                    <li id="li38"><a href="javascript:updateTeaInfo();"><span class="spanTextSon">教师信息维护</span></a></li>
 			                    <li id="li39"><a href="javascript:divide();"><span class="spanTextSon">复试分组</span></a></li>
-			                    <li id="li40"><a href="javascript:assignYjr();"><span class="spanTextSon">指定复试阅卷人</span></a></li>
-			                    <li id="li41"><a href="javascript:assignMszz();"><span class="spanTextSon">指定面试组长</span></a></li>
+			                    <!-- <li id="li40"><a href="javascript:assignYjr();"><span class="spanTextSon">指定/解除复试阅卷人</span></a></li> -->
+			                   <!--  <li id="li41"><a href="javascript:assignMszz();"><span class="spanTextSon">指定/解除面试组长</span></a></li>-->
 			                    <li id="li42"><a href="javascript:calculateScore();"><span class="spanTextSon">计算成绩</span></a></li>
 			                    
 			                </ul>
@@ -182,7 +184,7 @@
 			    </div>
 			<div class="htmleaf-container">
 			<div class="col-md-5  col-md-offset-2 col-xs-5 col-xs-offset-3" style="height:85px;margin-top: 15px"><img class="img-responsive" src="${path}/static/img/banner.png"></div>
-			<div class="col-md-3  col-xs-4 text1">研究生信息管理</div>
+			<div class="col-md-3  col-xs-4 text1">研究生信息管理</div><span class="glyphicon glyphicon-off" style="color: red;font-size: 18px;padding-top: 60px" id="logout">注销</span>
 	
 			</div>
 			<br>
@@ -213,7 +215,16 @@
 	  </body>
 	  <script type="text/javascript">
 	  	$(function(){
-	  		
+	  	
+console.log(" 				 /\\            /\\  \n" +
+			"    			/  \\          /  \\  \n"+
+			"		  	   /    \\        /    \\  \n"+
+			"\n"		  									+
+			"  												\n"+
+			"      				 =========			 \n"+
+			"	  有任何疑问,请尽情骚扰网站创作人，微信与手机同步\n"+
+			"	  		        15853261424					 \n"	);
+			  		
 	  		var role1 = "${info.role}";
 	  		var role2  = "${managerloginfo.role}";
 	  		var stustate = "0";
@@ -224,7 +235,7 @@
 	  			$("#li3").remove();
 	  			$("#li21").remove();
 	  			$("#li23").remove();
-
+	  			$("#li25").remove();
 	  			if(stustate=="1"){
 	  				
 	  				$("#showmsg").css("color","black").css("font-size","18px").text(name+"  您好!");
@@ -251,52 +262,6 @@
   		  			$("#li22").remove();
   		  			$("#li23").remove();
   		  			$("#li24").remove();
-  		  			$("#li32").remove();
-  		  			$("#li33").remove();
-  				}else if(type==31){
-  					$("#lii1").remove();
-  		  			$("#li22").remove();
-  		  			$("#li24").remove();
-  		  			$("#li31").remove();
-  		  			$("#li33").remove();
-  		  			$("#li34").remove();
-  		  			$("#li35").remove();
-  		  			$("#li36").remove();
-  					$("#li37").remove();
-  					$("#li38").remove();
-	  				$("#li39").remove();
-	  				$("#li40").remove();
-  					$("#li41").remove();
-  					$("#li42").remove();
-  				}else if(type==32){
-  					$("#lii1").remove();
-  		  			$("#li22").remove();
-  		  			$("#li24").remove();
-  		  			$("#li31").remove();
-  		  			$("#li32").remove();
-  		  			$("#li34").remove();
-  		  			$("#li35").remove();
-  		  			$("#li36").remove();
-  					$("#li37").remove();
-  					$("#li38").remove();
-	  				$("#li39").remove();
-	  				$("#li40").remove();
-  					$("#li41").remove();
-  					$("#li42").remove();
-  				}else if(type==33){
-  					$("#lii1").remove();
-  		  			$("#li22").remove();
-  		  			$("#li24").remove();
-  		  			$("#li31").remove();
-  		  			$("#li34").remove();
-  		  			$("#li35").remove();
-  		  			$("#li36").remove();
-  					$("#li37").remove();
-  					$("#li38").remove();
-	  				$("#li39").remove();
-	  				$("#li40").remove();
-  					$("#li41").remove();
-  					$("#li42").remove();
   				}
 	  		
 	  			if(state=="1"){
@@ -394,6 +359,18 @@
 	  	function calculateScore(){
 	  		$("#main").load("calculateScore");
 	  	}
+	  	
+	  	function updatePwd(){
+	  		$("#main").load("updateTeaPwd");
+	  	}
+	  	$("#logout").click(function(){
+	  		window.location.href = "${path}/logout";
+	  	});
+	  	
+	  	function jump(){
+	  		window.open("http://cise.sdust.edu.cn/web2010/cp.php?ac=teachers&tuid=1");
+	  	}
+	  
 	  </script>
 	  
 </html>

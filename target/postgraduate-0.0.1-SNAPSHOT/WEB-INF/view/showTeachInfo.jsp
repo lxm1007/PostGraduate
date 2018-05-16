@@ -60,7 +60,6 @@
 		  <option value="教授">教授</option>
 		  <option value="副教授">副教授</option>
 		   <option value="讲师">讲师</option>
-		   <option value="其他">其他</option>
 		</select>
 	  </div>
 	</div>
@@ -106,28 +105,18 @@
 	  </div>
 	  <br>
 	</div>
-	<div id="mangerpwd" class="form-group has-warning" >
-	 <label class="col-md-2 col-xs-3 col-xs-offset-3 col-md-offset-0 control-label" >账户密码</label>
-	 <div class="col-md-4 col-xs-6">
+	<input name="managerId" type="hidden" value="${managerloginfo.info.managerId }">
 	 
-	<input type="password" class="form-control form" name="managerPwd" id="pwd"  autofocus="autofocus" required="required">
-	  </div>
 	  <br>
-	</div>
 	<div class="col-md-12 col-xs-12"><br></div>
- 
 	<div class="col-md-12"><br></div>
 	<div class="col-md-2 col-md-offset-5">
 	<button class="btn btn-primary" type="button" id="confirm">提交</button>
 	</div>
-	<input name="managerId" type="hidden" value="${managerloginfo.info.managerId }">
+	
 	</form>
   </div>
 
-
-</div>
-</div>
-</div>
 
 			<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" >
 				  <div class="modal-dialog" role="document" style="width:350px;text-align: center;">
@@ -163,6 +152,7 @@ $(function(){
 	$("#select4").val(major);
 });
 $("#confirm").click(function(){
+
 	 $("#form3").ajaxSubmit(function (data) {
 	        var msg = data.msg;
 	        if(msg=="success"){
@@ -173,12 +163,14 @@ $("#confirm").click(function(){
 	        $("#modal2").modal(function(){
 	        	backdrop:'static'
 	        });
-	    });
+	    });	
 });
 
 $("#btn2").click(function(){
 	  $("#modal2").modal('hide');
 });
+
+
 </script>
 
 </body>

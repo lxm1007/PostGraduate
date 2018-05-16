@@ -48,13 +48,18 @@
     </div>
   </div>
 <div class="form-group">
-<label for="input3" class="col-md-2 control-label">教师:</label>
+<label for="input4" class="col-md-2 control-label" >面试组长:</label>
+    <div class="col-md-2 ">
+     <input id="input4"  name="groupLeader" style="width: 150px;height: 30px">
+    </div>
+</div>
+<div class="form-group">
+<label for="input3" class="col-md-2 control-label">面试教师:</label>
     <div class="col-md-2 ">
      <textarea rows="3" cols="40" id="input3"  name="groupTea" placeholder="XXX/XX形式"></textarea>
     </div>
     <input type="hidden" id="groupNum" name="groupNum">
 </div>
-
 </form>
       </div>
       <div class="modal-footer">
@@ -83,9 +88,9 @@ function buildTal(data){
 		var index = $("<td></td>").text(eval(o)+1);
 		var group = $("<td></td>").text("组别"+data.info[o].STU_STATE.substring(1));
 		var num = $("<td></td>").text(data.info[o].NUM);
-		var btn2 = $("<button class='btn btn-danger btn2'>详细</button>");
+		var btn2 = $("<button class='btn btn-danger btn2'>编辑学生分组</button>");
 		var td = $("<td></td>");
-		var btn1 = $("<button class='btn btn-primary btn1'>编辑</button>");
+		var btn1 = $("<button class='btn btn-primary btn1'>编辑教师分组</button>");
 		var btn = td.append(btn2).append(btn1);
 		tr.append(index).append(group).append(num).append(btn).appendTo($("#tab2 tbody"));
 		 
@@ -102,12 +107,19 @@ $(document).on("click",".btn1",function(){
 		url:"${path}/serachGroup?groupNum="+num,
 		type:"GET",
 		success:function(data){
-			if(data.info!=null||data.info != ""){
-				console.log(data.info);
+			if(data.msg=="error"){
+				$("#input1").val("");
+				$("#input2").val("");
+				$("#input3").val("");
+				$("#input4").val("");
+			}else{
+			if(data.info!=null||data.info != ""||data.info!=undefined){
+				console.log(data);
 				$("#input1").val(data.info.GROUP_TIME);
 				$("#input2").val(data.info.GROUP_PLACE);
 				$("#input3").val(data.info.GROUP_TEA);
-			}
+				$("#input4").val(data.info.GROUP_LEADER);
+			}}
 			
 		}
 		
@@ -132,7 +144,8 @@ $("#btnn").click(function(){
 });
 
 $("#back").click(function(){
-	$("#main").load("divide");	
+	$("#main").load("divide");
+	
 });
 </script>
 </html>

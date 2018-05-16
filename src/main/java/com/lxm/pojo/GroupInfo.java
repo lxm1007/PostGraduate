@@ -12,8 +12,21 @@ public class GroupInfo {
     private String groupPlace;
 
     private String groupTea;
+    
+    
+    private String groupLeader;
+    
+    
 
-    public BigDecimal getGroupId() {
+    public String getGroupLeader() {
+		return groupLeader;
+	}
+
+	public void setGroupLeader(String groupLeader) {
+		this.groupLeader = groupLeader;
+	}
+
+	public BigDecimal getGroupId() {
         return groupId;
     }
 

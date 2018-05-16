@@ -375,7 +375,6 @@ $(document).on("click",'.btn1',function(){
 		success:function(data){
 			var msg = data.msg;
 			if(msg=="success"){
-				console.log(data.info);
 				$("#input1").val(data.info.stuMajorcondition);
 				$("#input2").val(data.info.stuTel);
 				$("#input3").val(data.info.stuName);
@@ -495,7 +494,6 @@ $("#addOne").click(function(){
 			url:"${path}/addOneByTea",
 			data:$("#data2").serialize(),
 			success:function(data){
-				console.log(data);
 				if(data.msg=="success"){
 					$("#modal7").modal('hide');
 				}else{

@@ -141,7 +141,7 @@
       <input type="text" class="form-control" id="input13" value="" readonly="readonly">
     </div>
      <label for="input14" class="col-md-2 control-label">附件</label>
-    <div class="col-md-4 ">
+    <div class="col-md-4" id="down">
      <a id="download" style="line-height:12px;padding-left: 20px;margin-top: 80px;">下载</a>
     </div>
   </div>
@@ -169,7 +169,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="btn5">确定选择</button>
+        <button type="button" class="btn btn-primary" id="btn5">确定</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -212,7 +212,6 @@ $(function(){
 				$("#showNum").css("color","red").text("当前已选择人数:"+data.num+",计划人数:"+realNum);
 				$("input[name='managerId']").val("${managerloginfo.managerId}")
 			 buildTal(data);
-				console.log(data.info);
 				if(data.num == realNum){
 					$("button").attr("disabled","disabled");
 				}
@@ -247,6 +246,7 @@ $("#search").click(function(){
 });
 
 function buildTal(data){
+	$("#tab2 tbody").empty();
 	for(var o in data.info){
 		
 		var tr = $("<tr></tr>");
@@ -258,14 +258,16 @@ function buildTal(data){
 		var sex = $("<td></td>").text(data.info[o].STU_SEX);
 		var hide =$("<input type='hidden' name='stuId'>").val(data.info[o].STU_ID);
 		var state = data.info[o].STU_STATE;
-		if(state == '3'){
-			var btn2 = $("<td><button class='btn btn-danger btn2'>确认选择</button></td>");
-		}else if(state =='4'){
+		if(state == '4'){
 			var btn2 = $("<td><button class='btn btn-danger btn2' disabled='disabled'>已选择</button></td>");
+			var btn3 = $("<td><button class='btn btn-primary btn3'  disabled='disabled'>拒绝</button></td>");
+		}else {
+			var btn2 = $("<td><button class='btn btn-danger btn2'>确认选择</button></td>");
+			var btn3 = $("<td><button class='btn btn-primary btn3'>拒绝</button></td>");
 		}
 		var btn1 = $("<td><button class='btn btn-primary btn1'>详情</button></td>");
-		
-		tr.append(index).append(name).append(sex).append(score).append(master).append(school).append(btn1).append(btn2).append(hide).appendTo($("#tab2 tbody"));
+		//var btn3 = $("<td><button class='btn btn-primary btn3'>拒绝</button></td>");
+		tr.append(index).append(name).append(sex).append(score).append(master).append(school).append(btn1).append(btn3).append(btn2).append(hide).appendTo($("#tab2 tbody"));
 		 
 	}
 }
@@ -293,7 +295,12 @@ $(document).on("click",'.btn1',function(){
 				$("#input12").val(data.info.stuSub2);
 				$("#input13").val(data.info.stuMajorcondition);
 				var candidate = data.info.stuCandidate;
-				$("#download").attr("href","${path}/downloadExtra?stuCandidate="+candidate);
+				if(data.info.stuHonor!=null){
+					$("#download").attr("href","${path}/downloadExtra?stuCandidate="+candidate);
+				}else{
+					$("#down").attr("hidden","hidden");
+				}
+				
 				
 			}
 		}
@@ -320,6 +327,7 @@ $(document).on("click",'.btn2',function(){
 			async:false,
 			success:function(data){
 				if(data.msg=="success"){
+					console.log(data);
 					$("#showmsg2").empty();
 					$("#showmsg2").text("操作成功").css("color","green");
 					$("#showNum").css("color","red").text("当前已选择人数:"+data.info.managerSelected);
@@ -347,6 +355,44 @@ $("#btn6").click(function(){
 });
 $("#btnn").click(function(){
 	$("#modal4").modal('hide');
+});
+$(document).on("click",'.btn3',function(){
+	
+	$("#showmsg").empty();
+	$("#showmsg").text("是否拒绝该学生???").css("color","red");
+	$("#modal5").modal(function(){
+		backdrop:'static'
+	});
+	var stuId = $(this).parent().parent("tr").find("input[name='stuId']").val();
+	var managerId = "${managerloginfo.info.managerId}";
+	
+	$("#btn5").click(function(){
+		$("#modal5").modal('hide');
+		$.ajax({
+			url:"${path}/cancleSelect?stuId="+stuId,
+			type:"GET",
+			success:function(data){
+				if(data.msg=="success"){
+					console.log(data);
+					$("#showmsg2").empty();
+					$("#showmsg2").text("操作成功").css("color","green");
+					$("#modal6").modal(function(){
+						backdrop:'static'
+					});
+					$("#btn6").click(function(){
+						$('#modal6').modal('hide');
+						$('#modal6').on('hidden.bs.modal', function () {
+							$("#main").load("showSelect");
+							});
+					});
+				}
+			}
+			
+		});
+		
+	});
+	
+	
 });
 
 </script>

@@ -17,7 +17,7 @@
 	<script type="text/javascript" src ="${path }/static/bootstrap-3.3.7-dist/jquery.jsonp.js"></script>
 </head>
 <body style="color: black;">
-<div class="modal fade" tabindex="-1" role="dialog" id="modal4" style="color: black;">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal4" aria-hidden="true" data-backdrop="static" style="color: black;">
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="text-align: center">
       <div class="modal-header">
@@ -94,7 +94,6 @@ $(function(){
 		type:"POST",
 		async:false,
 		success:function(data){
-			console.log(data);
 			for(o in data.info){
 				if(data.info[o].F_CODE=='reSub1'){
 					resub1 = data.info[o].F_VALUE;
@@ -156,7 +155,6 @@ $("#btnn").click(function(){
 			data:$("#form1").serialize(),
 			type:"POST",
 			success:function(data){
-				console.log(data);
 				if(data.msg=='success'){
 					$("#modal4").modal('hide');
 					$("#msgn").css("color","green").text("修改成功!!!")
@@ -165,7 +163,10 @@ $("#btnn").click(function(){
 					});
 					$("#btn2").click(function(){
 						$("#modal2").modal('hide');
-						location.reload();
+						$('#modal2').on('hidden.bs.modal', function (e) {
+							location.reload();
+							})
+						
 					});
 				}else{
 					$("#msg").css("color","red").text("操作失败请重试");

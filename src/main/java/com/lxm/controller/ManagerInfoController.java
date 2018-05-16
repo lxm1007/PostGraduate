@@ -256,4 +256,33 @@ public class ManagerInfoController {
 		
 		return this.managerInfoService.addOneTea(managerInfo);
 	}
+	/**
+	 * 取消指定的角色
+	 * @param managerInfo
+	 * @return
+	 */
+	@RequestMapping("/cancleAssign")
+	@ResponseBody
+	public Map<String,Object> cancleAssign(ManagerInfo managerInfo) {
+		return this.managerInfoService.cancleAssign(managerInfo);
+	}
+	/**
+	 * 跳转到修改教师密码界面
+	 * @return
+	 */
+	@RequestMapping("/updateTeaPwd")
+	public String updatePwd() {
+		return "updatePwd";
+	}
+	/**
+	 * 修改教师登录密码
+	 * @param managerInfo
+	 * @return
+	 * @throws NoSuchAlgorithmException 
+	 */
+	@RequestMapping("/changeTeaPwd")
+	@ResponseBody
+	public Map<String,Object> changeTeaPwd(ManagerInfo managerInfo) throws NoSuchAlgorithmException{
+		return this.managerInfoService.changeTeaPwd(managerInfo);
+	}
 }

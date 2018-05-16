@@ -491,4 +491,32 @@
   ) values(SEQ_MANAGER_INFO.NEXTVAL,#{managerName},#{managerAccount},#{managerPwd},#{managerCond},#{managerTitle},#{managerRatednum},#{managerSex},#{managerMentortype},#{managerMajor})
   
   </insert>
+  
+  <update id="cancleAssign" parameterType="com.lxm.pojo.ManagerInfo">
+  update MANAGER_INFO set MANAGER_TYPE = '2'
+  <choose>
+  <when test="managerId != null and managerId !=''">
+  where MANAGER_ID = #{managerId}
+  </when>
+  <otherwise>
+  where 1>2
+  </otherwise>
+  </choose>
+  
+  </update>
+  
+  <update id="changeTeaPwd" parameterType="com.lxm.pojo.ManagerInfo">
+  	update MANAGER_INFO set MANAGER_PWD  = #{managerPwd}
+  	<choose>
+  	<when test="managerId != '' and managerId != null">
+  	where MANAGER_ID = #{managerId}
+  	</when>
+  	<otherwise>
+  	where 1>2
+  	</otherwise>
+  	
+  	</choose>
+  
+  </update>
+  
 </mapper>

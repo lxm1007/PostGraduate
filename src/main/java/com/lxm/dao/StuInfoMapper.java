@@ -74,4 +74,10 @@ public interface StuInfoMapper {
 	List<StuInfo> searchStuAndScore(StuInfo stuInfo);
 
 	List<Map<String, Object>> showAllScore();
+
+	int cancleSelect(StuInfo stuInfo);
+
+	int updateStuState(StuInfo stuInfo);
+
+	StuInfo checkStuState(StuInfo stuInfo);
 }

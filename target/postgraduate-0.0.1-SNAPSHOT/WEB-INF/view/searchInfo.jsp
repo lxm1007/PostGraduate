@@ -73,6 +73,8 @@ $(function(){
 		$("#input4").val("已选择导师,待导师确认").css("color","green");
 	}else if(val=="4"){
 		$("#input4").val("导师已确认").css("color","green");
+	}else if(val=="5"){
+		$("#input4").val("导师已拒绝,可重新选择").css("color","red");
 	}else{
 		$("#input4").val("未选择导师").css("color","red");
 	}

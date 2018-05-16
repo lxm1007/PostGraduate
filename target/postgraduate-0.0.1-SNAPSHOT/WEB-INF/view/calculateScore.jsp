@@ -21,7 +21,7 @@ width: 60px;
 <div class="col-md-offset-12"><button id="download" class="btn btn-success">导出</button></div>
 <br>
 <div class="col-md-12 col-md-offset-2" style="color: red;" >
-初试:<input placeholder="百分比" id="input1">复试:<input placeholder="百分比" id="input2">复试笔试:<input placeholder="百分比" id="input5">复试面试:<input placeholder="百分比" id="input6">复试英语:<input placeholder="百分比" id="input3">面试成绩:<input placeholder="百分比" id="input4">
+初试:<input placeholder="百分比" id="input1">复试:<input placeholder="百分比" id="input2">复试面试:<input placeholder="百分比" id="input6">复试英语:<input placeholder="百分比" id="input3">
 
 <input type="hidden" id="input7"><input type="hidden" id="input8">
 <button id="calculate" class="btn btn-danger">计算</button>
@@ -92,13 +92,13 @@ $.ajax({
 		}
 		
 		$("#input1").val(FirstScore);
-		$("#input2").val(SecondWritten);
+		$("#input2").val(SecondScore);
 		$("#input3").val(reEnglish);
-		$("#input4").val(interview);
-		$("#input5").val(SecondWritten);
+		//$("#input4").val(interview);
+		//$("#input5").val(SecondWritten);
 		$("#input6").val(SecondInterview);
-		$("#input7").val(reSub1Val);
-		$("#input8").val(reSub2Val);
+		//$("#input7").val(reSub1Val);
+		//$("#input8").val(reSub2Val);
 }
 });
 
@@ -131,8 +131,8 @@ $("#calculate").click(function(){
 	per1 = $("#input1").val().substring(0,2);
 	per2 = $("#input2").val().substring(0,2);
 	per3 = $("#input3").val().substring(0,2);
-	per4 = $("#input4").val().substring(0,2);
-	per5 = $("#input5").val().substring(0,2);
+	//per4 = $("#input4").val().substring(0,2);
+	//per5 = $("#input5").val().substring(0,2);
 	per6 = $("#input6").val().substring(0,2);
 	per7 = $("#input7").val().substring(0,2);
 	per8 = $("#input8").val().substring(0,2);
@@ -148,8 +148,8 @@ $("#calculate").click(function(){
 		if (s4.toString()=="") s4=0;
 		var s5 = $("#tab2").find("tr:eq("+i+")").find("td:eq(11)").text();
 		if (s5.toString()=="") s5=0;
-		var finalscore = (parseFloat(per1/100*parseFloat(s1))+parseFloat(per2/100*((per5/100*(parseFloat(s2)*(per7/100)+parseFloat(s3)*(per8/100)))+(per6/100*((per4/100*s4)+(per3/100*s5)))))).toFixed(2);
-		
+		//var finalscore = (parseFloat(per1/100*parseFloat(s1))+parseFloat(per2/100*((per5/100*(parseFloat(s2)*(per7/100)+parseFloat(s3)*(per8/100)))+(per6/100*((per4/100*s4)+(per3/100*s5)))))).toFixed(2);
+		var finalscore = (parseFloat((per1/100/5)*parseFloat(s1)+parseFloat((parseFloat(s2)+parseFloat(s3)+parseFloat(s4)*per6/100+parseFloat(s5)*per3/100)/2*per2/100))).toFixed(2);
 		$("#tab2").find("tr:eq("+i+")").find("td:eq(12)").text(finalscore);
 		
 	}

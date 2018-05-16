@@ -57,7 +57,6 @@ $("#search").click(function(){
 		type:"POST",
 		data:JSON.stringify(str),
 		success:function(data){
-			console.log(data);
 			if(data.msg=="success"){
 			
 			 buildTal(data);

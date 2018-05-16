@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    GROUP_ID, GROUP_NUM, GROUP_TIME, GROUP_PLACE, GROUP_TEA
+    GROUP_ID, GROUP_LEADER,GROUP_NUM, GROUP_TIME, GROUP_PLACE, GROUP_TEA
   </sql>
   <select id="selectByExample" parameterType="com.lxm.pojo.GroupInfoExample" resultMap="BaseResultMap">
     select
@@ -101,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.lxm.pojo.GroupInfo">
     insert into GROUP_INFO (GROUP_ID, GROUP_NUM, GROUP_TIME, 
-      GROUP_PLACE, GROUP_TEA)
+      GROUP_PLACE, GROUP_TEA,GROUP_LEADER)
     values (SEQ_GROUP_INFO.nextval, #{groupNum,jdbcType=VARCHAR}, #{groupTime,jdbcType=VARCHAR}, 
-      #{groupPlace,jdbcType=VARCHAR}, #{groupTea,jdbcType=VARCHAR})
+      #{groupPlace,jdbcType=VARCHAR}, #{groupTea,jdbcType=VARCHAR},#{groupLeader,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lxm.pojo.GroupInfo">
     insert into SCOTT.GROUP_INFO

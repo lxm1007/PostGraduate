@@ -42,7 +42,7 @@ width: 160px;
   <button type="button" id="search" class="btn btn-primary">搜索</button>
 </form>
 </div>
-<div class="col-md-offset-2" style="color: black;">
+<div class="col-md-offset-3" style="color: black;">
 <table class="table table-hover" id="tab2">
 <thead>
 	
@@ -284,8 +284,6 @@ $(document).on("click",'.btn1',function(){
 		success:function(data){
 			var msg = data.msg;
 			if(msg=="success"){
-				console.log(data.info);
-				
 				$("#input1").val(data.info.managerCond);
 				$("#input2").val(data.info.managerTel);
 				$("#input3").val(data.info.managerName);
@@ -339,7 +337,6 @@ $("#btnn").click(function(){
 		url:"${path}/updateTeaInfoSecond",
 		data:$("#data").serialize(),
 		success:function(data){
-			console.log(data.msg);
 			if(data.msg=="success"){
 				$("#modal4").modal('hide');
 				$("#modal4").on("hidden.bs.modal",function(){

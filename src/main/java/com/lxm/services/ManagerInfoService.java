@@ -73,9 +73,7 @@ public class ManagerInfoService {
 
 	@Transactional
 	public Map<String, Object> updateTeachInfoFir(ManagerInfo managerInfo) throws NoSuchAlgorithmException {
-		if(!managerInfo.getManagerPwd().equals("")) {
-			managerInfo.setManagerPwd(Tools.getMD5String(managerInfo.getManagerPwd()));
-		}
+	
 		int n = this.managerInfoMapper.updateTeachInfoFir(managerInfo);
 		
 		Map<String,Object> map = new HashMap<>();
@@ -369,6 +367,35 @@ public class ManagerInfoService {
 		}else {
 			info.put("msg", "error");
 		}
+		return info;
+	}
+
+
+
+	public Map<String, Object> cancleAssign(ManagerInfo managerInfo) {
+		
+		Map<String,Object> info = new HashMap<>();
+		int n = this.managerInfoMapper.cancleAssign(managerInfo);
+		if(n>0) {
+			info.put("msg", "success");
+		}else {
+			info.put("msg", "error");
+		}
+		return info;
+	}
+
+
+
+	public Map<String, Object> changeTeaPwd(ManagerInfo managerInfo) throws NoSuchAlgorithmException {
+		Map<String,Object> info = new HashMap<String,Object>();
+		managerInfo.setManagerPwd(Tools.getMD5String(managerInfo.getManagerPwd()));
+		int n = this.managerInfoMapper.changeTeaPwd(managerInfo);
+		if(n>0) {
+			info.put("msg", "success");
+		}else {
+			info.put("msg", "error");
+		}
+		
 		return info;
 	}
 			

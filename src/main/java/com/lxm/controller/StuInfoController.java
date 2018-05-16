@@ -4,9 +4,9 @@ package com.lxm.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -30,7 +30,8 @@ import com.lxm.services.StuInfoService;
  *
  */
 @Controller
-@SessionAttributes(value= {"loginfo","managerloginfo"})
+
+//@SessionAttributes(value= {"loginfo","managerloginfo"}) 改用session.setAttribute
 public class StuInfoController {
 	@Autowired
 	StuInfoMapper stuInfoMapper;
@@ -49,15 +50,24 @@ public class StuInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping("/login")
-	public Map<String,Object> login(@RequestBody Map<String,String> arrgs,Model model){
-		String role = arrgs.get("role");
+	public Map<String,Object> login(@RequestBody Map<String,String> arrgs,Model model,HttpSession session){
+		String role = arrgs.get("role");	
 		if(role.equals("2")) {
 		Map<String,Object> map =this.stuInfoService.login(arrgs);
-		model.addAttribute("loginfo", map);
+		if(session.getAttribute("managerloginfo")!=null) {
+			session.removeAttribute("managerloginfo");
+			
+		}
+
+		session.setAttribute("loginfo", map);
 		return map;		
 		}else if(role.equals("1")) {
 			Map<String,Object> map =this.managerInfoService.login(arrgs);
-			model.addAttribute("managerloginfo", map);
+			if(session.getAttribute("loginfo")!=null) {
+				session.removeAttribute("loginfo");	
+			}
+
+			session.setAttribute("managerloginfo", map);
 			return map;
 		}
 		
@@ -73,6 +83,8 @@ public class StuInfoController {
 	 */
 	@RequestMapping("/loginSuccess")
 	public String getAllInfo(HttpSession session) {
+		System.out.println(session.getAttribute("loginfo"));
+		System.out.println(session.getAttribute("managerloginfo"));
 		Map<String,Object> map1 = (Map<String,Object>)session.getAttribute("loginfo");
 		Map<String,Object> map2 = (Map<String,Object>)session.getAttribute("managerloginfo");
 		if(map1 != null||map2 != null) {
@@ -164,8 +176,8 @@ public class StuInfoController {
 		Map<String,String[]> map = request.getParameterMap();
 		
 		System.out.println("参数为"+map.keySet());
-		
-		String path="D:\\oxygen_project\\postgraduate\\src\\main\\webapp\\"+file.getOriginalFilename();
+		String path = "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.0\\webapps\\postgraduate\\"+file.getOriginalFilename();
+		//String path="D:\\oxygen_project\\postgraduate\\src\\main\\webapp\\"+file.getOriginalFilename();
         
         File newFile=new File(path);
         //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
@@ -419,5 +431,46 @@ public class StuInfoController {
 		
 		return this.stuInfoService.searchStuAndScore(stuInfo);
 	
+	}
+	/**
+	 * 退出登录
+	 * @param requst
+	 * @return
+	 */
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginfo");
+		session.removeAttribute("managerloginfo");
+		return "forward:index.jsp";
+	}
+	/**
+	 * 拒绝已选择自己的学生
+	 * @param info
+	 * @return
+	 */
+	@RequestMapping("/cancleSelect")
+	@ResponseBody
+	public Map<String,Object>cancleSelect(StuInfo info){
+		return this.stuInfoService.cancleSelect(info);
+	}
+	/**
+	 * 解除学生的分组状态
+	 * @return
+	 */
+	@RequestMapping("/updateStuState")
+	@ResponseBody
+	public Map<String,Object> updateStuState(StuInfo stuInfo){
+		return this.stuInfoService.updateStuState(stuInfo);
+	}
+	
+	/**
+	 * 查询当前学生状态是否为1
+	 * @param stuInfo
+	 * @return
+	 */
+	@RequestMapping("/checkStuState")
+	@ResponseBody
+	public Map<String,Object> checkStuState(StuInfo stuInfo){
+		return this.stuInfoService.checkStuState(stuInfo);
 	}
 }

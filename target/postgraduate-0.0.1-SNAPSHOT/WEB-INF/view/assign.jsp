@@ -21,7 +21,6 @@
 		<td>研究方向</td>
 		<td>指导人数</td>
 		<td>职称</td>
-		<td>导师类型</td>
 		<td>专业</td>
 		<td>角色</td>
 		<td colspan="2">操作</td>
@@ -83,14 +82,14 @@ $(function(){
 			var cond = $("<td></td>").text(data.info[o].managerCond);
 			var rated = $("<td></td>").text(data.info[o].managerRatednum);
 			var title = $("<td></td>").text(data.info[o].managerTitle);
-			var type = $("<td></td>").text(data.info[o].managerMentortype);
 			var major = $("<td></td>").text(data.info[o].managerMajor);
 			var hide =$("<input type='hidden' name='managerId'>").val(data.info[o].managerId);
 			var type = data.info[o].managerType;
 			var role = $("<td style='color:red'></td>").text(type=="2"?"未分配角色":(type=="31"?"复试阅卷人":(type=="32"?"面试组长":"阅卷人/面试组长")))
 			var btn1 = $("<td><button class='btn btn-primary btn1'>确认指定</button></td>");
+			var btn2 = $("<td><button class='btn btn-danger btn2'>取消指定</button></td>");
 			
-			tr.append(index).append(name).append(tel).append(cond).append(rated).append(title).append(type).append(major).append(role).append(btn1).append(hide).appendTo($("#tab2 tbody"));
+			tr.append(index).append(name).append(tel).append(cond).append(rated).append(title).append(major).append(role).append(btn1).append(btn2).append(hide).appendTo($("#tab2 tbody"));
 			 
 		}
 	}
@@ -101,6 +100,32 @@ $(function(){
 		var id = $(this).parent().parent("tr").find("input[name='managerId']").val();
 		$.ajax({
 			url:"${path}/assignDuty?type="+type+"&&id="+id,
+			type:"GET",
+			success:function(data){
+				if(data.msg=="success"){
+					$("#modal8").modal(function(){
+						backdrop:'static'
+					});
+					$("#btn8").click(function(){
+						
+						$("#modal8").modal('hide');
+						$('#modal8').on('hidden.bs.modal', function (e) {
+							$("#main").load("assign",{"type":"${type}"})
+							});
+					
+					});
+				}
+			}
+			
+			
+		});
+		
+	});
+	
+	$(document).on("click",'.btn2',function(){
+		var id = $(this).parent().parent("tr").find("input[name='managerId']").val();
+		$.ajax({
+			url:"${path}/cancleAssign?managerId="+id,
 			type:"GET",
 			success:function(data){
 				if(data.msg=="success"){

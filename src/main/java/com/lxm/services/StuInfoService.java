@@ -538,5 +538,36 @@ public class StuInfoService {
 		
 		return map;
 	}
+	public Map<String, Object> cancleSelect(StuInfo stuInfo) {
+		Map<String,Object> info = new  HashMap<>();
+		int n = this.stuInfoMapper.cancleSelect(stuInfo);
+		if(n>0) {
+			info.put("msg", "success");
+		}else {
+			info.put("msg", "error");
+		}
+		
+		return info;
+	}
+	public Map<String, Object> updateStuState(StuInfo stuInfo) {
+		Map<String,Object> map = new HashMap<>();
+		int n = this.stuInfoMapper.updateStuState(stuInfo);
+		if(n>0) {
+			map.put("msg", "success");
+			
+		}else {
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	public Map<String, Object> checkStuState(StuInfo stuInfo) {
+		Map<String,Object> map = new HashMap<>();
+		StuInfo info = this.stuInfoMapper.checkStuState(stuInfo);
+		if(info != null) {
+			map.put("info", info);
+		}
+		return map;
+	}
 	
 }

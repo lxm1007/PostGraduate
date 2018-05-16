@@ -58,7 +58,7 @@
   </div>
   <div class="form-group">
     <label  for="exampleInputPassword3">导师职称</label>
-    <input type="text" class="form-control" name="managerTitle" id="managerDetail" >
+    <input type="text" class="form-control" name="managerTitle" id="managerDetail" readonly="readonly" >
     <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     职称 <span class="caret"></span>
@@ -147,14 +147,31 @@ $("#search").click(function(){
 $(document).on("click",".btn111",function(){
 var name = $(this).parent("tr").find("td:eq(1)").text();
 
-	window.location.href="http://cise.sdust.edu.cn/web2010/cp.php?ac=teachers&tuid=1";
+	window.open("http://cise.sdust.edu.cn/web2010/cp.php?ac=teachers&tuid=1");
 
 });
 /* 注意 动态加载的时候 一定要用on事件绑定 click 事件无用 */
 
 $(document).on("click",".btn222",function(){
+	var  f = 0;
 	var num1 = $(this).parent("tr").find("td:eq(4)").text();
 	var num2 = $(this).parent("tr").find("td:eq(5)").text();
+	$.ajax({
+		url:"${path}/checkStuState?stuId="+"${info.info.stuId}",
+		type:"GET",
+		async:false,
+		success:function(data){
+			if(data.stuState=="1");
+			alert("请先完善个人信息");
+			f = 1;
+		}
+			
+	});
+	
+	if(f==1){
+		return false;
+	}
+	
 	if(num1==num2 && num1!='0'){
 		$("#show").text("该导师研究生名额已满");
 		$("#modall").modal(function(){

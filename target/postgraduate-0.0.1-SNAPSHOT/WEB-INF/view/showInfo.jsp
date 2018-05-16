@@ -76,7 +76,7 @@
 	<div id="honor" class="form-group has-warning" style="line-height: 100px">
 	 <label class="col-sm-2 col-md-2 col-xs-4 col-xs-offset-2 col-md-offset-0 control-label">所获荣誉</label>
 	 <div class="col-md-9 col-xs-6">
-	  <textarea class="form-control" rows="5" name="stuHonor" id="honor">1.XXXX--按照该格式书写(附件考号+姓名的压缩包)</textarea>
+	  <textarea class="form-control" rows="5" name="stuHonor" id="honor">1.XXXX--按照该格式书写,没有则填写无(附件为(考号.zip)命名的压缩包)</textarea>
 	  </div>
 	  <br>
 	</div>

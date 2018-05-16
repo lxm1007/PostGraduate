@@ -415,10 +415,15 @@
   	</if>
   	
   	</set>
-  	<if test="stuId != null and stuId != ''">
-  	
+  	<choose>
+  	<when test="stuId != null and stuId != ''">
   	where STU_ID = #{stuId}
-  	</if>
+  	</when>
+  	<otherwise>
+  	where 1>2
+  	</otherwise>
+  	</choose>
+
   </update>
   
   <select id="selectStuInfo" resultType="com.lxm.pojo.StuInfo">
@@ -494,7 +499,7 @@
   	
   	from STU_INFO 
   where STU_STATE != '-1'
-  order by STU_MAJORNAME
+  order by STU_MAJORNAME,STU_TOTALSCORE1 desc
   </select>
 
   <update id="updateStuInfoByTea" parameterType="com.lxm.pojo.StuInfo">
@@ -653,8 +658,9 @@ select <include refid="Base_Column_List"/> from STU_INFO
   	<if test="stuName != null">
   	and STU_NAME LIKE '%'||#{stuName}||'%'
   	</if>
+  
   	</where>
-
+ order by STU_MAJORNAME,STU_TOTALSCORE1 desc
 </select>
 
 
@@ -662,4 +668,30 @@ select <include refid="Base_Column_List"/> from STU_INFO
 select STU_ID,STU_ID,STU_NAME,STU_SUB1,STU_SUB2,STU_POLOTICS,STU_ENGLISH,STU_TOTALSCORE1,STU_RESUB1,STU_RESUB2,STU_REENGLISH,STU_INTERVIEW,STU_CANDIDATE from STU_INFO 
 
 </select>
+
+<update id="cancleSelect" parameterType="com.lxm.pojo.StuInfo">
+update stu_info set MANAGER_ID = '' ,STU_STATE = '5'
+<choose>
+<when test="stuId != null  and stuId !=''">
+where STU_ID = #{stuId}
+</when>
+<otherwise>
+where 1>2
+</otherwise>
+</choose>
+</update>
+<update id="updateStuState" parameterType="com.lxm.pojo.StuInfo">
+
+update stu_info set STU_STATE = '3'
+<choose>
+<when test="stuId != null  and stuId !=''">
+where STU_ID = #{stuId}
+</when>
+<otherwise>
+where 1>2
+</otherwise>
+</choose>
+
+</update>
+
 </mapper>
