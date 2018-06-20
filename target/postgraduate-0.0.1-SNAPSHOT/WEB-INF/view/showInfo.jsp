@@ -275,7 +275,8 @@ $("#fileupload").click(function(){
 		$("#otherspan").css("color","red").text("文件未上传或命名不正确");
 	}
 	
-	if(f1&&f2&&f3&&(f4||f5)&&f6){
+	/*暂时不对文件的上传进行处理  */
+	if(f1&&f2&&f3&&(f4||f5)){
 		var formdata = new FormData($('#form3')[0]);
 		$.ajax({
 			

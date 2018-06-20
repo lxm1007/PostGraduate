@@ -702,5 +702,7 @@ select STU_STATE from stu_info
 where  stu_id = #{stuId}
 </if>
 </select>
-
+<delete id="empty">
+delete from stu_info
+</delete>
 </mapper>

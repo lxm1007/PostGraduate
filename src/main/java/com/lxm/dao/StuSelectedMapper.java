@@ -28,4 +28,6 @@ public interface StuSelectedMapper {
     int updateByPrimaryKeySelective(StuSelected record);
 
     int updateByPrimaryKey(StuSelected record);
+
+	int empty();
 }

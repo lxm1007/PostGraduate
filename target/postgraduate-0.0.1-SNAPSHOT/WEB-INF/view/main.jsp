@@ -299,7 +299,19 @@ console.log(" 				 /\\            /\\  \n" +
 	  	}
 	  	
 	  	function searchTea(){
-	  		$("#main").load("seachTea");
+	  		$.ajax({
+	  			url:"${path}/checkStuState?stuId="+"${info.info.stuId}",
+	  			type:"POST",
+	  			success:function(data){
+	  				if(data.info.stuState=="1"){
+	  					alert("请完善个人信息！！");
+	  				}else{
+	  					$("#main").load("seachTea");
+	  				}
+	  			}
+	  			
+	  		});
+	  		
 	  	}
 
 	  	function searchInfo(){

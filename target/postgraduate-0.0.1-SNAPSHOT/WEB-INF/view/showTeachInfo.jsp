@@ -56,7 +56,7 @@
 	 <label class="col-md-2 col-xs-3 col-xs-offset-3 col-md-offset-2  control-label">职称</label>
 	 <div class="col-md-3 col-xs-6">
 	  <span id="emailspan"></span>
-	    <select class="form-control" id="select2" name="managerDetail">
+	    <select class="form-control" id="select2" name="managerTitle">
 		  <option value="教授">教授</option>
 		  <option value="副教授">副教授</option>
 		   <option value="讲师">讲师</option>

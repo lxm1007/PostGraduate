@@ -214,4 +214,7 @@
   (SELECT MAX(GROUP_ID) FROM GROUP_INFO WHERE GROUP_NUM = #{groupNum}) 
   
   </select>
+  <delete id="empty">
+  delete from group_info 
+  </delete>
 </mapper>

@@ -208,4 +208,7 @@
       CHOOSE_TYPE = #{chooseType,jdbcType=VARCHAR}
     where CHOOSE_ID = #{chooseId,jdbcType=DECIMAL}
   </update>
+  <delete id="empty">
+  delete from stu_selected
+  </delete>
 </mapper>

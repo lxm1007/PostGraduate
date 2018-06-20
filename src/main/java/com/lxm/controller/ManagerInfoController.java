@@ -285,4 +285,11 @@ public class ManagerInfoController {
 	public Map<String,Object> changeTeaPwd(ManagerInfo managerInfo) throws NoSuchAlgorithmException{
 		return this.managerInfoService.changeTeaPwd(managerInfo);
 	}
+	
+	@RequestMapping("/empty")
+	@ResponseBody
+	public Map<String,Object> empty(){
+		return this.managerInfoService.empty();
+	}
+	
 }

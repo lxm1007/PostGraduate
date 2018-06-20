@@ -694,4 +694,13 @@ where 1>2
 
 </update>
 
+<select id="checkStuState" parameterType="com.lxm.pojo.StuInfo" resultType="com.lxm.pojo.StuInfo">
+
+select STU_STATE from stu_info 
+
+<if test="stuId != null  and stuId !=''">
+where  stu_id = #{stuId}
+</if>
+</select>
+
 </mapper>

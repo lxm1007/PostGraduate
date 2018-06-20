@@ -80,4 +80,6 @@ public interface StuInfoMapper {
 	int updateStuState(StuInfo stuInfo);
 
 	StuInfo checkStuState(StuInfo stuInfo);
+
+	int empty();
 }

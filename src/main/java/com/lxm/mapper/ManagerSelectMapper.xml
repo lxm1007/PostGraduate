@@ -209,5 +209,7 @@
     where SELECT_ID = #{selectId,jdbcType=DECIMAL}
   </update>
   
-
+<delete id="empty">
+delete from manager_select
+</delete>
 </mapper>

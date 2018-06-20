@@ -175,13 +175,15 @@ public class StuInfoController {
 	public Map<String,String> upload(HttpServletRequest request,MultipartFile file) throws IllegalStateException, IOException{
 		Map<String,String[]> map = request.getParameterMap();
 		
-		System.out.println("参数为"+map.keySet());
-		String path = "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.0\\webapps\\postgraduate\\"+file.getOriginalFilename();
-		//String path="D:\\oxygen_project\\postgraduate\\src\\main\\webapp\\"+file.getOriginalFilename();
-        
-        File newFile=new File(path);
-        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
-        file.transferTo(newFile);  
+		if(file!=null&&!file.getOriginalFilename().equals("")) {
+			String path = "C:\\Program Files\\Apache Software Foundation\\Tomcat 8.0\\webapps\\postgraduate\\"+file.getOriginalFilename();
+			//String path="D:\\oxygen_project\\postgraduate\\src\\main\\webapp\\"+file.getOriginalFilename();
+	        
+	        File newFile=new File(path);
+	        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+	        file.transferTo(newFile);  
+		}
+		
         
 		return this.stuInfoService.fistUpdate(map);
 	}

@@ -20,7 +20,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lxm.dao.GroupInfoMapper;
 import com.lxm.dao.ManagerInfoMapper;
+import com.lxm.dao.ManagerSelectMapper;
+import com.lxm.dao.StuInfoMapper;
+import com.lxm.dao.StuSelectedMapper;
 import com.lxm.pojo.ManagerInfo;
 import com.lxm.pojo.StuInfo;
 import com.lxm.tools.Tools;
@@ -29,7 +33,14 @@ import com.lxm.tools.Tools;
 public class ManagerInfoService {
 	@Autowired
 	ManagerInfoMapper managerInfoMapper;
-	
+	@Autowired
+	ManagerSelectMapper managerSelectMapper;
+	@Autowired
+	StuInfoMapper stuInfoMapper;
+	@Autowired
+	StuSelectedMapper stuSelectedMapper;
+	@Autowired
+	GroupInfoMapper groupInfoMapper;
 	private final static String xls = "xls";
 	private final static String xlsx = "xlsx";
 	
@@ -397,6 +408,29 @@ public class ManagerInfoService {
 		}
 		
 		return info;
+	}
+
+
+
+	@Transactional
+	public Map<String, Object> empty() {
+		Map<String,Object> map = null;
+		try {
+			int  f1 = this.managerSelectMapper.empty();
+			int f2 = this.stuSelectedMapper.empty();
+			int f3 = this.stuInfoMapper.empty();
+			int f4 = this.groupInfoMapper.empty();
+			if(f1>0&&f2>0&&f3>0&&f4>0) {
+				map= new HashMap<>();
+				map.put("success", "msg");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			map.put("error", "msg");
+			e.printStackTrace();
+		}
+	
+		return map;
 	}
 			
 }

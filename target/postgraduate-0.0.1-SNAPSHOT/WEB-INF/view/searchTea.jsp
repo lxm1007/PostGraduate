@@ -135,7 +135,7 @@ $("#search").click(function(){
 				var btn2 = $("<button type='button'  class='btn btn-danger btn222'>选择</button>");
 				var hide = $("<input type='hidden' class='hide' name='managerId'>").attr("value",data[o].managerId);
 
-				tr.append(id).append(name).append(tel).append(con).append(allNum).append(select).append(hide).append(btn1).append(btn2).appendTo($("#tab2 tbody"));
+				tr.append(id).append(name).append(tel).append(con).append(allNum).append(select).append(hide).append(btn1).append("&nbsp;&nbsp;").append(btn2).appendTo($("#tab2 tbody"));
 				
 			}
 		}
@@ -153,8 +153,28 @@ var name = $(this).parent("tr").find("td:eq(1)").text();
 /* 注意 动态加载的时候 一定要用on事件绑定 click 事件无用 */
 
 $(document).on("click",".btn222",function(){
+	var  f = 0;
 	var num1 = $(this).parent("tr").find("td:eq(4)").text();
 	var num2 = $(this).parent("tr").find("td:eq(5)").text();
+	$.ajax({
+		url:"${path}/checkStuState?stuId="+"${info.info.stuId}",
+		type:"GET",
+		async:false,
+		success:function(data){
+			if(data.stuState=="1"){
+				alert("请先完善个人信息");
+				f = 1;
+			}
+			
+			
+		}
+			
+	});
+	
+	if(f==1){
+		return false;
+	}
+	
 	if(num1==num2 && num1!='0'){
 		$("#show").text("该导师研究生名额已满");
 		$("#modall").modal(function(){

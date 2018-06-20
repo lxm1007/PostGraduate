@@ -287,9 +287,9 @@
    		MANAGER_SEX = #{managerSex},
    
    </if>
-   <if test="managerDetail != null and managerDetail != ''">
+   <if test="managerTitle != null and managerTitle != ''">
    
-   		MANAGER_DETAIL  = #{managerDetail},
+   		MANAGER_TITLE  = #{managerTitle},
    </if>
    <if test="managerMentortype != null and managerMentortype != ''">
    		MANAGER_MENTORTYPE  =#{managerMentortype},

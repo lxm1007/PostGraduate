@@ -28,4 +28,6 @@ public interface ManagerSelectMapper {
     int updateByPrimaryKeySelective(ManagerSelect record);
 
     int updateByPrimaryKey(ManagerSelect record);
+
+	int empty();
 }

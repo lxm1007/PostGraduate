@@ -33,6 +33,8 @@ public interface GroupInfoMapper {
 
 	Map<String, Object> serachGroupInfo(GroupInfo groupInfo);
 
+	int empty();
+
 
 	
 }

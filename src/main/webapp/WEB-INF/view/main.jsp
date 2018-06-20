@@ -177,7 +177,7 @@
 			                    <!-- <li id="li40"><a href="javascript:assignYjr();"><span class="spanTextSon">指定/解除复试阅卷人</span></a></li> -->
 			                   <!--  <li id="li41"><a href="javascript:assignMszz();"><span class="spanTextSon">指定/解除面试组长</span></a></li>-->
 			                    <li id="li42"><a href="javascript:calculateScore();"><span class="spanTextSon">计算成绩</span></a></li>
-			                    
+			                    <li id="li43"><a href="javascript:empty();"><span class="spanTextSon">清空数据库</span></a></li>
 			                </ul>
 			            </li>
 			        </ul>
@@ -299,7 +299,19 @@ console.log(" 				 /\\            /\\  \n" +
 	  	}
 	  	
 	  	function searchTea(){
-	  		$("#main").load("seachTea");
+	  		$.ajax({
+	  			url:"${path}/checkStuState?stuId="+"${info.info.stuId}",
+	  			type:"POST",
+	  			success:function(data){
+	  				if(data.info.stuState=="1"){
+	  					alert("请完善个人信息！！");
+	  				}else{
+	  					$("#main").load("seachTea");
+	  				}
+	  			}
+	  			
+	  		});
+	  		
 	  	}
 
 	  	function searchInfo(){
@@ -371,6 +383,22 @@ console.log(" 				 /\\            /\\  \n" +
 	  		window.open("http://cise.sdust.edu.cn/web2010/cp.php?ac=teachers&tuid=1");
 	  	}
 	  
+	  	function empty(){
+	  		var f = confirm("是否确认清空数据库？？？");
+	  		if(f){
+	  			$.ajax({
+	  				url:"${path}/empty",
+	  				type:"POST",
+	  				success:function(data){
+	  					if(data.msg=="success"){
+	  						alert("清空成功");
+	  					}else{
+	  						alert("清空失败或数据为空");
+	  					}
+	  				}
+	  			});
+	  		}
+	  	}
 	  </script>
 	  
 </html>

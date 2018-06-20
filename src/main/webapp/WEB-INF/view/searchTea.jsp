@@ -135,7 +135,7 @@ $("#search").click(function(){
 				var btn2 = $("<button type='button'  class='btn btn-danger btn222'>选择</button>");
 				var hide = $("<input type='hidden' class='hide' name='managerId'>").attr("value",data[o].managerId);
 
-				tr.append(id).append(name).append(tel).append(con).append(allNum).append(select).append(hide).append(btn1).append(btn2).appendTo($("#tab2 tbody"));
+				tr.append(id).append(name).append(tel).append(con).append(allNum).append(select).append(hide).append(btn1).append("&nbsp;&nbsp;").append(btn2).appendTo($("#tab2 tbody"));
 				
 			}
 		}
@@ -161,9 +161,12 @@ $(document).on("click",".btn222",function(){
 		type:"GET",
 		async:false,
 		success:function(data){
-			if(data.stuState=="1");
-			alert("请先完善个人信息");
-			f = 1;
+			if(data.stuState=="1"){
+				alert("请先完善个人信息");
+				f = 1;
+			}
+			
+			
 		}
 			
 	});
